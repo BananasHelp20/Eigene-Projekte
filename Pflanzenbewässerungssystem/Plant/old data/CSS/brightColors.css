@@ -1,0 +1,292 @@
+:root {
+    --active-stop-or-decrease-button-red: rgb(220, 0, 0);
+    --hover-stop-or-decrease-button-red: rgb(202, 13, 0);
+    --idle-stop-or-decrease-button-red: rgb(181, 0, 0);
+    
+    --idle-start-or-increase-button-green: rgb(77, 159, 0);
+    --hover-start-or-increase-button-green: rgb(88, 196, 0);
+    --active-start-or-increase-button-green: rgb(105, 216, 0);
+
+    --menu-active-color: rgb(199, 199, 199);
+    --menu-hover-color: rgb(211, 211, 211);
+    --menu-idle-color: rgb(221, 221, 221);
+    --active-menu-text-color: var(--menu-text-color);
+
+    --div-border-color: rgb(55, 174, 0);
+    --menu-border-color: rgb(46, 139, 0);
+    --menu-text-color: rgb(46, 139, 0);
+
+    --site-body-backgroundcolor: rgba(165, 165, 165, 0.836);
+    --site-body-border-color: rgba(186, 186, 186, 0);
+
+    --actual-body-backroundcolor: gray;
+
+    --header-backgroundcolor: rgb(190, 190, 190);
+    --footer-backgroundcolor: rgb(144, 144, 144);
+
+    --default-text-color: rgb(0, 0, 0);
+    --table-row-color: rgb(49, 49, 49);
+    --red-button-color: rgb(169, 0, 0);
+
+    --switch-backgroundcolor: rgb(34, 34, 34);
+    --switch-border-color: darkcyan;
+    --switch-text-color: darkcyan;
+    --switch-hover-color: rgb(58, 58, 58);
+    --switch-active-border-color: rgb(34, 34, 34);;
+    --switch-active-text-color: rgb(34, 34, 34);;
+    --switch-active-backgroundcolor: darkcyan;
+
+    --backToTop-button-color: rgb(205, 205, 205);
+
+    --use-buttons-background-color: rgb(205, 205, 205);
+    --use-buttons-hover-background-color: rgb(184, 184, 184);
+    --use-buttons-active-background-color: rgb(145, 145, 145);
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--default-text-color);
+    border-color: black;
+}
+
+header {
+    background-color: var(--header-backgroundcolor);
+    z-index: 2;
+}
+
+body {
+    background-color: var(--actual-body-backgroundcolor);
+}
+
+footer {
+    text-align: center;
+    background-color: var(--footer-backgroundcolor);
+}
+
+.fa-lightbulb {
+    color: black;
+}
+
+#lightSwitch,
+.menuItem,
+.activeMenuItem,
+button,
+header,
+footer {
+    font-size: 15;
+}
+
+.siteBody {
+    background-color: var(--site-body-backgroundcolor);
+    border: 2px, solid;
+    border-radius: 10px;
+    border-color: var(--site-body-border-color);
+}
+
+.text,
+table,
+.headingText,
+.subHeadingText {
+    color: var(--default-text-color);
+}
+
+.menuItem,
+.activeMenuItem {
+    border-radius: 10px;
+    border-color: var(--menu-border-color);
+    border-style: solid;
+    border-width: 2px;
+    background-color: var(--menu-idle-color);
+    color: var(--menu-text-color);
+}
+
+.menuOption,
+.activeMenuOption {
+    color: var(--menu-text-color);
+}
+
+.menuItem:hover,
+.activeMenuItem {
+    background-color: var(--menu-hover-color);
+}
+
+.menuItem:active {
+    background-color: var(--menu-active-color);
+    border-color: var(--active-menu-text-color);
+}
+
+.menuItem:active span {
+    border-color: var(--active-menu-text-color);;
+    color: var(--active-menu-text-color);;
+}
+
+.menuItem:active span i {
+    border-color: var(--active-menu-text-color);
+    color: var(--active-menu-text-color);;
+}
+
+#lightSwitch {
+    background-color: var(--switch-backgroundcolor);
+    border-radius: 10px;
+    border-color: var(--switch-border-color);
+    border-style: solid;
+    border-width: 2px;
+    color: var(--switch-text-color);
+}
+
+#lightSwitch i {
+    color: var(--switch-text-color);
+}
+
+#lightSwitch:hover {
+    background-color: var(--switch-hover-color);
+}
+
+#lightSwitch:active {
+    background-color: var(--switch-active-backgroundcolor);
+    color: var(--switch-active-text-color);
+    border-color: var(--switch-active-border-color);
+}
+
+#lightSwitch:active i {
+    color: var(--switch-active-text-color);
+}
+
+#backToTop,
+.fa-arrow-up {
+    color: var(--backToTop-button-color);
+}
+
+tr {
+    background-color: var(--table-row-color);
+}
+
+.row {
+    background-color: var(--table-row-color);
+    border: 2px, solid, var(--default-text-color);
+    border-collapse: collapse;
+}
+
+.tableDiv {
+    text-align: center;
+}
+
+.useIt {
+    background-color: var(--use-buttons-background-color);
+    border: 4px var(--div-border-color) solid;
+    border-radius: 5px;
+}
+
+.useItWisely {
+    background-color: var(--use-buttons-background-color);
+    border: 4px var(--div-border-color) solid;
+    border-radius: 5px;
+}
+
+.useIt:hover,
+.useItWisely:hover {
+    background-color: var(--use-buttons-hover-background-color);
+}
+
+.useIt:active,
+.useItWisely:active {
+    background-color: var(--use-buttons-active-background-color);
+}
+
+.prozessDiv {
+    text-align: center;
+}
+
+.pump {
+    background-color: var(--use-buttons-background-color);
+    border: 4px var(--div-border-color) solid;
+    border-radius: 5px;
+}
+
+.pumpBtn {
+    background-color: var(--div-border-color);
+    color: black;
+}
+
+.pumpBtn:hover {
+    background-color: rgb(0, 122, 122);
+    color: black;
+}
+
+.pumpBtn:active {
+    background-color: darkcyan;
+    color: black;
+}
+
+.startStop {
+    border: 3px, solid, var(--div-border-color);
+    border-radius: 5px;
+}
+
+#start {
+    background-color: var(--idle-start-or-increase-button-green);
+}
+
+#stop {
+    background-color: var(--idle-stop-or-decrease-button-red);
+}
+
+#start:hover {
+    background-color: var(--hover-start-or-increase-button-green);
+    cursor: cell;
+}
+
+#stop:hover {
+    background-color: var(--hover-stop-or-decrease-button-red);
+    cursor: cell;
+}
+
+#stop:active {
+    background-color: var(--active-stop-or-decrease-button-red);
+    cursor: cell;
+}
+
+#start:active {
+    background-color: var(--active-start-or-increase-button-green);
+    cursor: cell;
+}
+
+.increaseSec:hover,
+.increaseDays:hover {
+    background-color: var(--hover-start-or-increase-button-green);
+}
+
+.increaseSec:active,
+.increaseDays:active {
+    background-color: var(--active-start-or-increase-button-green);
+}
+
+.decreaseDays,
+.decreaseSec {
+    background-color: var(--idle-stop-or-decrease-button-red);
+}
+
+.increaseDays,
+.increaseSec {
+    background-color: var(--idle-start-or-increase-button-green);
+}
+
+.decreaseDays:hover,
+.decreaseSec:hover {
+    background-color: var(--hover-stop-or-decrease-button-red);
+}
+
+.decreaseDays:active,
+.decreaseSec:active {
+    background-color: var(--active-stop-or-decrease-button-red);
+}
+
+.increaseDays,
+.increaseSec {
+    border-color: var(--div-border-color);
+}
+
+.decreaseDays,
+.decreaseSec {
+    border-color: var(--red-button-color);
+}

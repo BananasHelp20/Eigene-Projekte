@@ -1,0 +1,176 @@
+:root {
+    --index-above: 2;
+    --index-normal: 1;
+    --index-below: 0;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: var(--index-normal);
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.headingText {
+    font-size: 25px;
+    text-align: center;
+}
+
+.subHeadingText {
+    font-size: 23px;
+    text-align: center;
+}
+
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+}
+
+header {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    height: 50px;
+    z-index: 2;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    height: 50px;
+}
+
+.text, table {
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.menuItem, .activeMenuItem {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-self: center;
+    width: 15%;
+}
+
+.menuOption, .activeMenuOption, .activeMenuItem, .menuItem {
+    text-shadow: 30px;
+    text-wrap: noWrap;
+}
+
+.siteBody {
+    position: absolute;
+    top: 56.5px;
+    right: 15%;
+    left: 15%;
+    padding-left: 5%;
+    padding-right: 5%;
+    z-index: 1;
+}
+
+#lightSwitch {
+    position: fixed;
+    top: 91%;
+    left: 1%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    width: 80px;
+}
+
+#backToTop {
+    position: fixed;
+    text-align: center;
+    font-size: x-large;
+    top: 91%;
+    right: 1%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 80px;
+}
+
+.startStop {
+    width: 50%;
+    height: 100px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.pump {
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.increaseDays, .decreaseDays, .increaseSec, .decreaseSec {
+    padding: 10px;
+    margin: 3px;
+    border-radius: 10px;
+    border: 2px solid;
+    width: 50%;
+    font-size: 17px;
+}
+
+d☺ {
+    color: aqua;
+}
+
+.useIt, .useItWisely {
+    border: 1px solid;
+    margin: 5px;
+    padding: 15px;
+    width: 50%;
+    font-size: 17px;
+}
+
+.useDiv {
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.useDiv div {
+    display: flex;
+    flex-wrap: nowrap;
+}

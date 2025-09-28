@@ -1,0 +1,44 @@
+//4. Pumpe manuell nutzen:
+
+webServer.on("/usePump4", HTTP_GET, [](AsyncWebServerRequest *request) {
+        usePump(intervalInMillSec[3], 4);
+        timeStamp[3] = timeClient.getEpochTime();
+        Serial.println("pump4 was used");
+        request->send(200);
+    }
+);
+
+webServer.on("/usePump4IgnoreCTR", HTTP_GET, [](AsyncWebServerRequest *request) {
+        usePump(intervalInMillSec[3], 4);
+        Serial.println("pump4 was used");
+        request->send(200);
+    }
+);
+
+//Tagesintervall für Pumpe 4 erhöhen:
+
+webServer.on("/increaseDaysPump4", HTTP_GET, [](AsyncWebServerRequest *request) {
+        Serial.println("days increased 4");
+        request->send(200, "text/plain", "" + (dayGoal[3] = manipulateDayPump(4, true, dayGoal)));
+    });
+
+//Tagesintervall für Pumpe 4 verkleinern:
+
+webServer.on("/decreaseDaysPump4", HTTP_GET, [](AsyncWebServerRequest *request) {
+        request->send(200, "text/plain", "" + (dayGoal[3] = manipulateDayPump(4, false, dayGoal)));
+        Serial.println("days decreased 4");
+    });
+
+//Sekundendauer für Pumpe 4 erhöhen:
+
+webServer.on("/increaseSecPump4", HTTP_GET, [](AsyncWebServerRequest *request) {
+        request->send(200, "text/plain", "" + (intervalInMillSec[3] = manipulateSecPump(4, true, intervalInMillSec)));
+        Serial.println("duration increased 4");
+    });
+
+//Sekundendauer für Pumpe 4 verkleinern:
+
+webServer.on("/decreaseSecPump4", HTTP_GET, [](AsyncWebServerRequest *request) {
+        Serial.println("duration decreased 4");
+        request->send(200, "text/plain", "" + (intervalInMillSec[3] = manipulateSecPump(4, false, intervalInMillSec))); 
+    });

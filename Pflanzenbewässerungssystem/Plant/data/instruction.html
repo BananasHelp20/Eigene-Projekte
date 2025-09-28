@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pflanzenbewässerungssystem/ducumentation</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link id="layoutMode" rel="stylesheet" href="./CSS/modern/modernLayout.css">
+    <link id="mode" rel="stylesheet" href="./CSS/modern/modernDark.css">
+    <script src="./Script/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/551bc8aabe.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="top"></div>
+    <header>
+        <a href="./codeFragments.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-code menuOption"></i>
+                Code Fragmente
+            </span>
+        </a>
+        <a href="./parts.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-list-check menuOption"></i>
+                Teileliste
+            </span>
+        </a>
+        <a href="./codeDocumentation.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-regular fa-file-code menuOption"></i>
+                Code Dokumentation
+            </span>
+        </a>
+        <div class="activeMenuItem">
+            <span class="activeMenuOption">
+                <i class="fa-solid fa-wrench menuOption"></i>
+                Bauanleitung
+            </span>
+        </div>
+        <a href="./index.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-backward menuOption"></i>
+                zurück zur Startseite
+            </span>
+        </a>
+    </header>
+    <div class="subHeader">
+        <!-- //Switch darkmode/lightmode and back to top -->
+        <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
+        <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
+    </div>
+    <div class="siteBody">
+        <br><br>
+        <h1>Bauanleitung</h1>
+        <br>
+        <p>
+            <disclaimer>
+                Manche Teile könnten anders aussehen als sie in meiner Anleitung dargestellt werden.
+                Alle hier abgebildeten Teile sind Teil des Prototyps meines Projekts. Logischerweiße müssen
+                es nicht genau diese Teile von genau diesen Herstellern sein, jedoch ist es empfohlen, da sowohl
+                Soft- wie auch Hardware auf diese Teile angepasst sind.
+            </disclaimer>
+            <br><br>
+            <step>Schritt 1: Materialien besorgen</step>
+            <br><br>
+            Die Teileliste finden sie hier: <a href="./parts.html"><u>Teileliste</u></a>
+            <br><br>
+            <step>Schritt 2: Crafting</step>
+            <br><br>
+            Folgende Materialien/Werkzeuge werden nun für den Transistor gebraucht:
+            <ul>
+                <li>1 Lötkolben</li>
+                <li>1 Pinzweierreihe</li>
+                <li>1 Transistor</li>
+                <li>2 f-f Jumper Kabel</li>
+            </ul>
+            Der Transistor sollte mit der Pinzweierreihe zusammengelötet werden:
+            <br>
+            <img src="" alt="">
+            <br>
+            Dann die Jumper Kabel draufstecken:
+            <br>
+            <img src="" alt="">
+            <br>
+            Nun wo der Transistor fertig ist, werden die USB-Anschlüsse gebaut, bzw der Anschluss zu den Pumpen:
+            <br><br>
+            gebraucht wird:
+            <ul>
+                <li>2 Hülsen</li>
+                <li>1 Crimpzange</li>
+                <li>1 Feuerzeug</li>
+                <li>1 Wasserpumpe mit USB-Stromzufuhr</li>
+                <li>1 USB zu Kontakt</li>
+                <li>2 Schrumpfschläuche (gerade groß genug, um ihn auf ihn draufzuschieben)</li>
+                <li>1 Abisolierzange</li>
+            </ul>
+            <br><br>
+            Zuerst die Hülsen auf den Kontakt stecken, falls genug kontakt vorhanden ist. Es ist empfehlenswert, dass genug Metall
+            zu sehen ist, dass die Hülse stecken bleibt, und nichts durchbrennt. Falls noch nicht genug Kontakt vorhanden ist, also
+            z. B. 7mm langen Hülse (Metall) zu 2mm langer Metall kontakt des Kabels, dann sollte noch mit einer sehr feinen
+            abisolierzange nachgeholfen werden, um den Kontakt zu verlängern, bei einer 7mm Hülse sind 4-6mm empfehlenswert.
+            Faustregel: der Kontakt sollte mehr als die Hälfte wie die Hülsenlänge betragen.
+            <br><br>
+            Hier die Hülse und der Kontakt (im Beispiel ist der Kontakt zu klein):
+            <br>
+            <img src="" alt="">
+            <br>
+            Dann draufstecken:
+            <br>
+            <img src="" alt="">
+            <br>
+            Dann wird der Schrumpfschlauch draufgesteckt, dieser sollte gerade groß genug sein, um über die Hülse zu passen:
+            <br>
+            <img src="" alt="">
+            <br>
+            Abschließend wird der Schrumpfschlauch mit Feuer geschrumpft, und mit der Crimpzange wird das Metall der Hülse
+            zusammengepresst, um fest mit dem Kontakt verbunden zu sein.
+            <br>
+            <img src="" alt="">
+            <br>
+            <img src="" alt="">
+            <br>
+            Wichtig: Rot sollte als (+) verwendet werden, während Schwarz als GND bzw. als (–) verwendet werden sollte um alles
+            einheitlich zu haben.
+            <br><br>
+            Zu guter Letzt kann nun die Pumpe eingesteckt werden:
+            <br>
+            <img src="" alt="">
+            <br>
+            a wir nun auch die Pumpe, und den Transistor fertig haben, können wir sich nun um die Kabel kümmern, die vom Transistor
+            zum Strom führen
+            <br><br>
+            folgendes wird für die Kabel gebraucht:
+            <br>
+            <ul>
+                <li>2 Rote/Schwarze Kabel (können auch 2 simple Kabel sein, aber Rot/Schwarz ist übersichtlicher)</li>
+                <li>4 Hülsen</li>
+                <li>4 Schrumpfschläuche</li>
+                <li>1 Crimpzange</li>
+            </ul>
+            Da ich das ganze mit den Hülsen schon erklärt habe, reicht vermutlich das Bild, um zu verstehen wie das gemacht wurde:
+            <br>
+            <img src="" alt="">
+            <br>
+            So, dann sind alle Teile fertiggestellt:
+            <ul>
+                <li>1 Jumper Kabel Transistor</li>
+                <li>1 Doppelkabel mit Hülsenenden</li>
+                <li>1 Pumpe mit USB-Anschluss</li>
+                <li>1 ESP32 S3 Wroom-1</li>
+            </ul>
+            Dann wird es Zeit, die Zeile zusammenzubauen. Stelle sicher, dass beim ESP32 noch 1 GND und 1 Entrypoint verfügbar ist:
+            <br>
+            <img src="" alt="">
+            <br>
+            Fangen wir mit dem Transistor und den Kabeln an:
+            <br><br>
+            Auf der Unterseite des Transistors gibt es eine Beschriftung, auf der einen Seite müsste OUT+ und OUT- stehen, und auf
+            der anderen Seite müsste sowas wie VIN+ und VIN- stehen.
+            <br><br>
+            Die Pumpe, oder bessergesagt die Kabel des USB-Anschlusses kommen in Out+/Out- hinein, hierbei gilt wieder Rot+ und
+            Schwarz-. Die Kabel die wir vorgefertigt haben gehen jedoch in Vin+/Vin- hinein.
+            <br><br>
+            Die Hülsen der Kabel werden auf der Oberseite auf der Seite hineingesteckt, und dann wird mit einem feinen
+            Schraubenschlüssel alles festgeschraubt, um den Kontakt zu festigen. Das müsste dann so aussehen:
+            <br>
+            <img src="" alt="">
+            <br>
+            <img src="" alt="">
+            <br>
+            Dann brauchen wir nur noch Strom, dazu verwenden wir bestenfalls ein Stromkabel, das Strom aus der Steckdose bezieht,
+            und somit eine Stromzufuhr darstellt:
+            <br>
+            <img src="" alt="">
+            <br>
+            <img src="" alt="">
+            <br>
+            Man braucht auch den richtigen Stecker, um die Stromzufuhr mit dem Kabelsalat zu verbinden:
+            <br>
+            <img src="" alt="">
+            <br>
+            <img src="" alt="">
+            <br>
+            Und wie gehabt, die ganzen roten Kabel in das + stecken, und die ganzen Schwarzen in das – Stecken:
+            <br>
+            <img src="" alt="">
+            <br>
+            Zu guter Letzt wird der Kabelsalat mit dem ESP32 verbunden:
+            <br>
+            <img src="" alt="">
+            <br>
+            Man kann sehen, dass die Pinzweierreihe jeweils Kontakt zu 1 Positiven Signal (PWM) und 1 Signal Ground (GND) hat, das
+            Jumperkabel das auf dem GND Pin steckt wird mit einem GND Pin auf dem ESP32 verbunden, und das PWM Jumperkabel wird mit
+            einem Entrypoint verbunden. Achte auf die Zahl des Entrypoints, die wird später noch wichtig.
+            <br>
+            <img src="" alt="">
+            <br>
+            So, du hast nun die Pumpe zusammengebaut, und mit dem ESP32 verbunden, sehen wir uns nun an, wie wir das Ganze im Code
+            konfigurieren, gehe dazu bitte auf die Seite “<a href=""><u>Codekonfiguration</u></a>”
+        </p>
+    </div>
+    <div class="background"></div>
+</body>
+</html>

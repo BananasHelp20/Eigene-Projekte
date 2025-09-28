@@ -1,0 +1,20 @@
+# Name,   Type, SubType, Offset,  Size, Flags
+#nvs,      data, nvs,     0x9000,  0x4000,
+#otadata,  data, ota,     0xd000,  0x2000,
+#phy_init, data, phy,     0xf000,  0x1000,
+#factory,  app,  factory, 0x10000, 1M,
+#ota_0,    app,  ota_0,   0x110000, 512K,
+#coredump, data, coredump, 0x190000, 128K,
+#spiffs,   data, spiffs,  0x1B0000, 1M,
+
+
+# Name,   Type, SubType, Offset,  Size, Flags
+nvs,      data, nvs,     0x9000,  0x4000,
+otadata,  data, ota,     0xd000,  0x2000,
+phy_init, data, phy,     0xf000,  0x1000,
+factory,  app,  factory, 0x10000, 1M,
+ota_0,    app,  ota_0,   0x110000, 512K,
+coredump, data, coredump, 0x190000, 128K,
+spiffs,   data, spiffs,  0x1B0000, 3M,
+
+#na i schreib ned in hochdeitsch

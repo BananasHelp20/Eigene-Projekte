@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pflanzenbewässerungssystem/statistics</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link id="mode" rel="stylesheet" href="./css/darkColors.css">
+</head>
+<body>
+    <img class="background" id="backgroundImg" src="./images/backgroundImage2.jpg" alt="Kaktusbild im Hintergrund">
+    <div class="header">
+        <a href="./doSomething.html"><span class="menu" id="top1">Manuell betätigen</span></a>
+        <a href="./settings.html"><span class="menu" id="top2">Einstellungen</span></a>
+        <a href="./OnAndOff.html"><span class="menu" id="top3">Ein- und ausschalten</span></a>
+        <button class="changeMode" id="change" onclick="darkmodeButton();">switch mode</button>
+    </div>
+
+    <div class="body">
+        <h1><br>Statistiken</h1><br>
+
+        <p>Pumpintervall Pumpe 1: <p id="displayCurrDP1"></p></p>
+        <p>Pumpintervall Pumpe 2: <p id="displayCurrDP2"></p></p>
+        <p>Pumpintervall Pumpe 3: <p id="displayCurrDP3"></p></p><br>
+
+        <p>Pumplänge Pumpe 1: <p id="displayCurrSP1"></p></p>
+        <p>Pumplänge Pumpe 2: <p id="displayCurrSP2"></p></p>
+        <p>Pumplänge Pumpe 3: <p id="displayCurrSP3"></p></p><br>
+
+        <p>Pumpe 1 in Betrieb seit: <p id="displayWorkingTime1"></p></p>
+        <p>Pumpe 2 in Betrieb seit: <p id="displayWorkingTime2"></p></p>
+        <p>Pumpe 3 in Betrieb seit: <p id="displayWorkingTime3"></p></p><br>
+
+        <p>Letzes Gießen der Pumpe 1 <p id="latestPumping1"></p></p>
+        <p>Letzes Gießen der Pumpe 2 <p id="latestPumping2"></p></p>
+        <p>Letzes Gießen der Pumpe 3 <p id="latestPumping3"></p></p><br>
+
+        <p>Pumpe 1 hat <p id="displayAmountPumped1"></p> mal gegossen</p>
+        <p>Pumpe 2 hat <p id="displayAmountPumped2"></p> mal gegossen</p>
+        <p>Pumpe 3 hat <p id="displayAmountPumped3"></p> mal gegossen</p>
+
+        <p>Anzahl an bewässerten Pflanzen: <p id="diplayPlantAmount"></p></p><br>
+
+        <p>Erfinder des Projekts: William Riegler </p>
+        <p>Mithelfende des Projekts: Diego Santigo Maddox Digglmann, Prof. Johannes Oppitz, Mario Ebenhofer </p>
+        <p>Projektzeitraum: 13.11.2024 - </p>
+        <p>Involvierte Programmiersprachen: HTML, CSS, JavaScript, C++ </p>
+        <p>Code Zeilen: <br>
+            &emsp;&emsp;Html:  <br> 
+            &emsp;&emsp;CSS: <br>
+            &emsp;&emsp;JavaScript: <br>
+            &emsp;&emsp;C++: <br> 
+        </p>
+        <p>Dokumente:</p>
+        <p>Ordner:</p>
+        <p>Bilder:</p>
+        <p>
+            was wird wie gemacht?
+
+        </p>
+    </div>
+
+    <div class="footer">
+        <a href="./wateredPlants.html"><span class="menuFoot">Bewässerte Pflanzen</span></a>
+        <a href="./index.html"><span class="menuFoot">zurück zur Startseite</span></a>
+        <span class="menuFootActive">Statistiken</span>
+        <a href="#top"><span id="foot1" class="menuFootSmall">zurück nach oben</span></a>
+    </div>
+    <script src="./script/getElement.js"></script>
+</body>

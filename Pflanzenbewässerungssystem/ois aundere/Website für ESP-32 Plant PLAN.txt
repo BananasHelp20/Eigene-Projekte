@@ -1,0 +1,71 @@
+Website für ESP-32 Plant
+------------------------
+
+----------------
+1) Grundsätzlich
+----------------
+
+-Text bleibt gleich
+
+-Bild im Hintergrund bleibt auch gleich
+
+-Darkmodefarben bleiben auch gleich Lightmodefarben auch, jedoch, müssen die Farben angepasst 
+ werden, aufgrund des neuen Layouts
+
+-Oben ist ein großes Menü, welches, wie jetzt mitgeht, beim skrollen
+ ÄNDERUNG: alles was im unteren Menü drin ist, wird ins obere verlagert
+
+-Upgrade zu Flex-layout (und eventuell dieses lesbare zeug mit Header und so)
+
+-media query fürs Handy, indem alle menü Buttons auf der rechten Seite Vertikal stehen
+
+-------------
+2) Statistics
+-------------
+
+-neues Layout, bleibt aber gleich
+
+
+3) Startseite
+
+-neues Layout, bleibt aber gleich
+
+-----------
+4) OnAndOff
+-----------
+
+-neues Layout
+
+-Off button setzt einen Boolean im C++ auf true, welcher dann den ESP-32 in eine Endlosschleife  
+ lenkt, sozusagen ein pseudo-ausschalter
+ 
+-On button setzt einen Boolean im C++ auf false, welcher den ESP-32 aus der Endlosschleife raus-
+ bringt
+
+--------------
+5) doSomething
+--------------
+
+-neues Layout, bleibt aber gleich
+
+----------------
+6) wateredPlants
+----------------
+
+-neues Layout, bleibt aber gleich
+
+-----------
+7) Settings
+-----------
+
+-neues Layout
+
+-es wird ein neuer Button hinzugefügt (Pumpe hinzufügen), welcher .innerHTML += 
+ zusammengebauter String ausführen wird
+
+-der zusammengebaute String wird den HTML code einer Pumpe beinhalten, und zum innerHMTL des
+ Eltern-tags hinzugefügt, darin wird ein ctr sein für die Pumpnummer
+
+-im besten Fall wird auch im C++ eine neue Pumpe erstellt und eingebunden. Ansonsten wird auf der
+ Website der Code, der einzubauen ist ausgegeben. Dafür wird ein eigenes Div mit speziellem CSS
+ gebraucht, bsp: W3Schools Beispielcodedivs

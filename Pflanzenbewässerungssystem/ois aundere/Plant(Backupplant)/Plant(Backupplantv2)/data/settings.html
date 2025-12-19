@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pflanzenbewässerungssystem/settings</title>
+    <link class="mode" id="mode" rel="stylesheet" href="./css/darkmode.css">
+</head>
+
+<body>
+    <img class="background" id="backgroundImg" src="./images/backgroundImage2.jpg" alt="Kaktusbild im Hintergrund">
+    <div class="header">
+        <a href="./doSomething.html"><span class="menu">Manuell betätigen</span></a>
+        <span class="menuActive">Einstellungen</span>
+        <a href="./OnAndOff.html"><span class="menu">Ein- und ausschalten</span></a>
+        <button class="changeMode" id="change" onclick=" darkmodeButton();">switch mode</button>
+    </div>
+
+    <div class="body">
+        <h1 id="top">Einstellungen</h1>
+        <p class="headingText">
+            hier sehen sie alle im Code konfigurierten Pumpen, und können sie einstellen
+        </p>
+        <div class="tableDiv">
+            <table id="mainTable">
+                <tr>
+                    <td class="row">
+                        <button onclick="fetch('/usePump1')" id="pump1" class="pump">Pumpe1</button>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <p>Intervall in Tagen:</p>
+                                </td>
+                                <td>
+                                    <p id="currDaysPump1"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button onclick="fetch('/increaseDaysPump1')" class="increaseDays" id="increaseDaysPump1">um 1 Tag erhöhen</button> <br>
+                                    <button onclick="fetch('/decreaseDaysPump1')" class="decreaseDays" id="decreaseDaysPump1">um 1 Tag verringern</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Dauer des Flows in Sekunden:</p>
+                                </td>
+                                <td>
+                                    <p id="currSecPump1"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button onclick="fetch('/increaseSecPump1')" class="increaseSeconds" id="increaseSecPump1">um 0.1 Sekunde erhöhen</button> <br>
+                                    <button onclick="fetch('/decreaseSecPump1')" class="decreaseSeconds" id="decreaseSecPump1">um 0.1 Sekunden verringern</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row">
+                        <button onclick="fetch('/usePump2')" id="pump2" class="pump">Pumpe2</button>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <p>Intervall in Tagen:</p>
+                                </td>
+                                <td>
+                                    <p id="currDaysPump2"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button onclick="fetch('/increaseDaysPump2')" class="increaseDays" id="increaseDaysPump2">um 1 Tag erhöhen</button> <br>
+                                    <button onclick="fetch('/decreaseDaysPump2')" class="decreaseDays" id="decreaseDaysPump2">um 1 Tag verringern</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Dauer des Flows in Sekunden:</p>
+                                </td>
+                                <td>
+                                    <p id="currSecPump2"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button onclick="fetch('/increaseSecPump2')" class="increaseSeconds" id="increaseSecPump2">um 0.1 Sekunde erhöhen</button> <br>
+                                    <button onclick="fetch('/decreaseSecPump2')" class="decreaseSeconds" id="decreaseSecPump2">um 0.1 Sekunden verringern</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row">
+                        <button onclick="fetch('/usePump3')" id="pump3" class="pump">Pumpe3</button>
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>
+                                    <p>Intervall in Tagen:</p>
+                                </td>
+                                <td>
+                                    <p id="currDaysPump3"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button onclick="fetch('/increaseDaysPump3')" class="increaseDays" id="increaseDaysPump3">um 1 Tag erhöhen</button> <br>
+                                    <button onclick="fetch('/decreaseDaysPump3')" class="decreaseDays" id="decreaseDaysPump3">um 1 Tag verringern</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Dauer des Flows in Sekunden:</p>
+                                </td>
+                                <td>
+                                    <p id="currSecPump3"></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <button onclick="fetch('/increaseSecPump3')" class="increaseSeconds" id="increaseSecPump3">um 0.1 Sekunde erhöhen</button> <br>
+                                    <button onclick="fetch('/decreaseSecPump3')" class="decreaseSeconds" id="decreaseSecPump3">um 0.1 Sekunden verringern</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="row">
+                        <!-- <button id="pump4" class="pump">Pumpe4</button> -->
+                    </td>
+                    <td >
+                        <table>
+                            <tr>
+                                <td>
+                                    <!-- <p>Intervall in Tagen:</p> -->
+                                </td>
+                                <td>
+                                    <!-- X tage -->
+                                </td>
+                                <td>
+                                    <!-- <button class="increaseTime" id="increasepump3">um 1 Tag erhöhen</button> -->
+                                </td>
+                            </tr>
+                            <tr>
+                                <p>
+                                    <!-- Pflanzen: -->
+                                </p>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <div class="footer">
+        <a href="#top"><span class="menuFoot">zurück nach oben</span></a>
+        <a href="./wateredPlants.html"><span class="menuFoot">Bewässerte Pflanzen</span></a>
+        <a href="./index.html"><span class="menuFoot">zurück zur Startseite</span></a>
+    </div>
+    <script src="./script/getElement.js"></script>
+</body>
+</html>

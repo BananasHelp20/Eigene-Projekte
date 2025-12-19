@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pflanzenbewässerungssystem/onAndOff</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link id="mode" rel="stylesheet" href="./css/darkColors.css">
+</head>
+<body>
+    <img class="background" id="backgroundImg" src="./images/backgroundImage2.jpg" alt="Kaktusbild im Hintergrund">
+    <div class="header">
+        <a href="./doSomething.html"><span class="menu">Manuell betätigen</span></a>
+        <a href="./settings.html"><span class="menu">Einstellungen</span></a>
+        <span class="menuActive">Ein- und ausschalten</span>
+        <button class="changeMode" id="change" onclick=" darkmodeButton();">switch mode</button>
+    </div>
+
+    <div class="body">
+        <h1 id="top"><br>Prozess</h1>
+        <p class="text">
+            Hier können sie den Prozess stoppen, der Counter wird zwar für die gewisse zeit ausgeschaltet, und aktuallisiert sich in der Ausgeschalteten Form nicht,
+            aber ab dem Moment wo der Prozess weitergeht wird alles, was in der Zeit geschehen ist, nachgeholt; sprich, wenn eine Pumpe in der Zeit pumpen hätte müssen,
+            während der Counter aus war, wird die Pumpe direkt zu pumpen beginnen wenn der ESP32 wieder Online geht.
+        </p>
+        <p>Momentan: <p id="currentlyDoingAnything"></p></p>
+        <div class="prozessDiv">
+            <button id="stop" class="startStop">Prozess Stoppen</button><br>
+            <button id="start" class="startStop">Prozess wieder starten</button>
+        </div>
+    </div>
+    <div class="footer">
+        <a href="./wateredPlants.html"><span class="menuFoot">Bewässerte Pflanzen</span></a>
+        <a href="./index.html"><span class="menuFoot">zurück zur Startseite</span></a>
+        <a href="./statistics.html"><span class="menuFoot">Statistiken</span></a>
+        <a href="#top"><span id="foot1" class="menuFootSmall">zurück nach oben</span></a>
+    </div>
+    <script src="./script/getElement.js"></script>
+</body>
+</html>

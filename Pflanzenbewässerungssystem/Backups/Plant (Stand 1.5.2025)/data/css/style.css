@@ -1,0 +1,181 @@
+:root {
+    --index-above: 2;
+    --index-normal: 1;
+    --index-below: 0;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: var(--index-normal);
+}
+
+#change, .menuFootSmall {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 13%;
+    /* background-color: var(--menu-backroundcolor); */
+    z-index: var(--index-above);
+}
+
+#change, .menu, .menuActive, .menuFoot, .menuFootSmall, .menuFootActive, .header, .foot {
+    font-size: 15;
+}
+
+.header {
+    text-align: center;
+    padding: 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: var(--index-above);
+}
+
+.menu, .menuActive {
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    margin-left: 2%;
+    margin-right: 2%;
+    /* background-color: var(--menu-backgroundcolor); */
+    z-index: var(--index-above);
+}
+
+
+.body {
+    position: absolute;
+    top: 56.5px;
+    right: 15%;
+    left: 15%;
+    padding-left: 5%;
+    padding-right: 5%;
+    border: 2px, solid;
+    border-radius: 10px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+    padding: 20px;
+    z-index: var(--index-above);
+}
+
+.menuFoot, .menuFootActive {
+    padding-left: 6%;
+    padding-right: 6%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-width: 2px;
+    margin-left: 2%;
+    margin-right: 2%;
+    /* background-color: var(--menu-backgroundcolor); */
+    z-index: var(--index-above);
+}
+
+#top, .headingText {
+    text-align: center;
+}
+
+.row {
+    border-collapse: collapse;
+}
+
+.tableDiv {
+    margin-left: 25%;
+    margin-right: 25%;
+}
+
+a {
+    text-decoration: none;
+}
+
+.text, .headingText, table {
+    font-size: 20px;
+}
+
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: var(--index-below);
+}
+
+button {
+    font-size: 15px;
+}
+
+.tableDiv {
+    text-align: center;
+}
+
+.useIt {
+    width: 74%;
+    height: 50px;
+    margin-bottom: 2%;
+    border-style: solid;
+    border-radius: 10px;
+    margin-right: 1%;
+}
+
+.useItWisely {
+    width: 25%;
+    height: 50px;
+    margin-bottom: 2%;
+    border-style: solid;
+    border-radius: 10px;
+}
+
+.prozessDiv {
+    text-align: center;
+}
+
+.pump {
+    height: 500px;
+}
+
+.startStop {
+    width: 50%;
+    height: 100px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+}
+
+#start:hover {
+    cursor: cell;
+}
+
+#stop:hover {
+    cursor: cell;
+}
+
+#stop:active {
+    cursor: cell;
+}
+
+#start:active {
+    cursor: cell;
+}
+
+.increaseSeconds, .decreaseSeconds, .increaseDays, .decreaseDays {
+    width: 100%;
+    height: 40px;
+}

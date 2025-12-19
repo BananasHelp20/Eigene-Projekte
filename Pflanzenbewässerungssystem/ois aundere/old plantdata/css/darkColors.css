@@ -1,0 +1,208 @@
+:root {
+    --active-red: rgb(168, 0, 0);
+    --hover-red: rgb(145, 10, 0);
+    --idle-red: rgb(117, 0, 0);;
+
+    --idle-green: rgb(41, 79, 5);
+    --hover-green: rgb(56, 112, 9);;
+    --active-green: rgb(71, 134, 11);
+
+    --menu-active-green: darkcyan;
+    --menu-hover-green: rgb(58, 58, 58);
+    --menu-idle-green: rgb(34, 34, 34);
+
+    --menu-border-color: darkcyan;
+    --menu-backroundcolor: rgba(95, 158, 160, 0.53);
+    
+    --menu-foot-active-blue: darkcyan;
+    --menu-foot-hover-blue: rgb(58, 58, 58);
+    --menu-foot-idle-blue: rgb(34, 34, 34);
+
+    --body-backgroundcolor: rgba(77, 77, 77, 0.836);
+    --body-border-color: rgba(186, 186, 186, 0);
+    --actual-body-backroundcolor: gray;
+
+    --table-row-color: rgb(49, 49, 49);
+
+    --header-backgroundcolor: rgb(49, 49, 49);
+    --footer-backgroundcolor: rgb(49, 49, 49);
+
+    --text-color: rgb(184, 184, 184);
+}
+
+* {
+    border-color: black;
+}
+
+button { 
+    color: var(--text-color);
+} 
+
+.menu {
+    background-color: var(--menu-idle-green);
+}
+
+.menuFoot, .menuFootSmall {
+    background-color: var(--menu-foot-idle-blue);
+}
+
+#change {
+    background-color: rgb(67, 201, 190);
+    border-color: black;
+    color: black;
+}
+
+#change:hover {
+    background-color: rgb(56, 159, 151);
+}
+
+#change:active {
+    background-color: darkcyan;
+    color: rgb(255, 255, 255);
+    border-color: rgb(255, 255, 255);
+}
+
+.header {
+    background-color: var(--header-backgroundcolor);
+    z-index: var(--index-above);
+}
+
+.menu, .menuActive {
+    border-color: var(--menu-border-color);
+    color: darkcyan;
+    z-index: var(--index-above);
+}
+
+.body {
+    background-color: var(--body-backgroundcolor);
+    border-color: var(--body-border-color);
+}
+
+body {
+    background-color: var(--actual-body-backgroundcolor);
+}
+
+.footer {
+    background-color: var(--footer-backgroundcolor);
+}
+
+tr {
+    background-color: var(--table-row-color);
+}
+
+.row {
+    background-color: var(--table-row-color);
+    border: 2px, solid, var(--text-color);
+}
+
+.menuFoot, .menuFootActive, .menuFootSmall {
+    color: darkcyan;
+    border-color: var(--menu-border-color);
+}
+
+.menuActive, .menu:hover {
+    background-color: var(--menu-hover-green);
+}
+
+.menuFootActive, .menuFoot:hover {
+    background-color: var(--menu-foot-hover-blue);
+}
+
+.menu:active {
+    background-color: var(--menu-active-green);
+    color: black;
+    border-color: black;
+}
+
+.menuFoot:active {
+    background-color: var(--menu-foot-active-blue);
+    color: black;
+    border-color: black;
+}
+
+.useIt {
+    background-color: var(--idle-green);
+    border-color: black;
+    color: black;
+}
+
+.useItWisely {
+    background-color: var(--idle-green);
+    border-color: black;
+    color: black;
+}
+
+.useIt:hover, .useItWisely:hover {
+    background-color: var(--hover-green);
+}
+
+.useIt:active, .useItWisely:active {
+    background-color: var(--active-green);
+}
+
+.pump {
+    background-color: rgb(0, 104, 104);
+    color: black;
+}
+
+.pump:hover {
+    background-color: rgb(0, 122, 122);
+    color: black;
+}
+
+.pump:active {
+    background-color: darkcyan;
+    color: black;
+}
+
+.startStop {
+    border: 3px, solid, var(--text-color);
+}
+
+#start {
+    background-color: var(--idle-green);
+}
+
+#stop {
+    background-color: var(--idle-red);
+}
+
+#start:hover {
+    background-color: var(--hover-green);
+}
+
+#stop:hover {
+    background-color: var(--hover-red);
+}
+
+#stop:active {
+    background-color: var(--active-red);
+}
+
+#start:active {
+    background-color: var(--active-green);
+}
+
+.increaseSeconds:hover, .increaseDays:hover {
+    background-color: var(--hover-green);
+}
+
+.increaseSeconds:active, .increaseDays:active {
+    background-color: var(--active-green);
+}
+
+.decreaseDays, .decreaseSeconds {
+    background-color: var(--idle-red);
+}
+
+.increaseDays, .increaseSeconds {
+    background-color: var(--idle-green);
+}
+
+.decreaseDays:hover, .decreaseSeconds:hover {
+    background-color: var(--hover-red);
+}
+
+.decreaseDays:active, .decreaseSeconds:active {
+    background-color: var(--active-red);
+}

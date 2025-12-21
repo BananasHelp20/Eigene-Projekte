@@ -15,6 +15,6 @@ phy_init, data, phy,     0xf000,  0x1000,
 factory,  app,  factory, 0x10000, 2M,
 ota_0,    app,  ota_0,   0x210000, 512K,
 coredump, data, coredump, 0x290000, 128K,
-spiffs,   data, spiffs,  0x2B0000, 2M,
+spiffs,   data, spiffs,  0x2B0000, 4M,
 
 #na i schreib ned in hochdeitsch

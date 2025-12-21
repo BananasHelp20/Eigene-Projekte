@@ -37,6 +37,7 @@ Preferences preferences;
 /** Pump variables */
 int dayGoal[3] = {10, 10, 10};                     //ziel an Tagen bis wieder gepumpt wird
 int intervalInMillSec[3] = {1000, 1000, 1000};     //zeit, die gepummt wird in Millisekunden
+int pumpCount = 3;                               //anzahl der pumpen
 
 /* variables for Time */
 long unsigned int timeStamp[3] = {timeClient.getEpochTime(), timeClient.getEpochTime(), timeClient.getEpochTime()};             //wenn gepumpt wird, wird diese Variable auf die momentane Zeit gesetzt
@@ -77,11 +78,11 @@ void usePump(int seconds, int pumpNum) {
     Serial.print("Pumped " + String(pumpNum) + " for " + String(seconds) + " milliseconds");
 }
 
-void flushAll(int seconds) {
-    usePump(seconds, 1);
-    usePump(seconds, 2);
-    usePump(seconds, 3);
-    /*usePump(seconds, 4);*/
+void flushAll() {
+    for (size_t i = 0; i < pumpCount; i++)
+    {
+        usePump(intervalInMillSec[i], i + 1);
+    }
 
     Serial.println("flushed all pumps");
 }
@@ -103,61 +104,93 @@ unsigned long remainingSeconds(int pumpNum) {
 }
 
 void webserverOnUse() {
-    webServer.on("/usePump1", HTTP_GET, [](AsyncWebServerRequest *request) {
+    String uri;
+    String key;
+    for (int i = 0; i < pumpCount; i++)
+    {
+        uri = "/usePump" + String(i + 1);
+        key = "Stamp" + String(i + 1);
+
+        webServer.on(uri.c_str(), HTTP_GET, [i, key](AsyncWebServerRequest *request) {
+            timeClient.update();
+            currentTimeInSec = timeClient.getEpochTime();
+            usePump(intervalInMillSec[i], i + 1);
+            timeStamp[i] = currentTimeInSec;
+            preferences.putULong(key.c_str(), timeStamp[i]);
+
+            Serial.println("pump" + String(i + 1) + " was used");
+            request->send(200, "text/plain", "OK"); 
+        });
+    }
+
+    for (int i = 0; i < pumpCount; i++) 
+    {
+        uri = "/usePumpNoCtr" + String(i + 1);
+
+        webServer.on(uri.c_str(), HTTP_GET, [i](AsyncWebServerRequest *request) {
+            usePump(intervalInMillSec[i], i + 1);
+
+            Serial.println("pump" + String(i + 1) + " was used");
+            request->send(200, "text/plain", "OK");
+        });
+    }
+
+    webServer.on("/flushAll", HTTP_GET, [](AsyncWebServerRequest *request) {
         timeClient.update();
         currentTimeInSec = timeClient.getEpochTime();
-        if (!canUsePump(1)) {
-            unsigned long rem = remainingSeconds(1);
-            request->send(423, "text/plain", String(rem)); // remaining seconds
-            return;
+        flushAll(); //flush all pumps
+        for (int i = 0; i < pumpCount; i++) {
+            timeStamp[i] = currentTimeInSec;
+            String keyStamp = "Stamp" + String(i + 1);
+            preferences.putULong(keyStamp.c_str(), timeStamp[i]);
         }
-        usePump(intervalInMillSec[0], 1);
-        timeStamp[0] = currentTimeInSec;
-        preferences.putULong("Stamp1", timeStamp[0]);
-        Serial.println("pump1 was used");
+        Serial.println("all pumps flushed");
         request->send(200, "text/plain", "OK");
     });
 
-    webServer.on("/usePump2", HTTP_GET, [](AsyncWebServerRequest *request) {
-        timeClient.update();
-        currentTimeInSec = timeClient.getEpochTime();
-        if (!canUsePump(2)) {
-            unsigned long rem = remainingSeconds(2);
-            request->send(423, "text/plain", String(rem));
+    webServer.on("/setPump", HTTP_GET, [](AsyncWebServerRequest *request) {
+        if (!request->hasParam("pump")) {
+            request->send(400, "text/plain", "missing pump");
             return;
         }
-        usePump(intervalInMillSec[1], 2);
-        timeStamp[1] = currentTimeInSec;
-        preferences.putULong("Stamp2", timeStamp[1]);
-        Serial.println("pump2 was used");
-        request->send(200, "text/plain", "OK"); 
-    });
-
-    webServer.on("/usePump3", HTTP_GET, [](AsyncWebServerRequest *request) {
-        timeClient.update();
-        currentTimeInSec = timeClient.getEpochTime();
-        if (!canUsePump(3)) {
-            unsigned long rem = remainingSeconds(3);
-            request->send(423, "text/plain", String(rem));
+        int pump = request->getParam("pump")->value().toInt();
+        if (pump < 1 || pump > pumpCount) {
+            request->send(400, "text/plain", "invalid pump");
             return;
         }
-        usePump(intervalInMillSec[2], 3);
-        timeStamp[2] = currentTimeInSec;
-        preferences.putULong("Stamp3", timeStamp[2]);
-        Serial.println("pump3 was used");
-        request->send(200, "text/plain", "OK");
+
+        int days = request->hasParam("days") ? request->getParam("days")->value().toInt() : dayGoal[pump-1];
+        int interval = request->hasParam("interval") ? request->getParam("interval")->value().toInt() : intervalInMillSec[pump-1];
+
+        dayGoal[pump - 1] = days;
+        intervalInMillSec[pump - 1] = interval;
+
+        String keyDay = "DayGoal" + String(pump);
+        String keyInterval = "Interval" + String(pump);
+
+        preferences.putInt(keyDay.c_str(), days);
+        preferences.putInt(keyInterval.c_str(), interval);
+
+        request->send(200, "application/json", String("{\"ok\":true,\"pump\":") + pump + "}");
     });
 
-    // return remaining seconds for all pumps as JSON array [s1,s2,s3]
-    webServer.on("/remaining", HTTP_GET, [](AsyncWebServerRequest *request) {
-        timeClient.update();
-        currentTimeInSec = timeClient.getEpochTime();
-        String json = "[";
-        for (int i = 1; i <= 3; i++) {
-            if (i > 1) json += ",";
-            json += String(remainingSeconds(i));
+    webServer.on("/getPump", HTTP_GET, [](AsyncWebServerRequest *request) {
+        if (!request->hasParam("pump")) {
+            request->send(400, "text/plain", "missing pump");
+            return;
         }
-        json += "]";
+
+        int pump = request->getParam("pump")->value().toInt();
+        if (pump < 1 || pump > pumpCount) {
+            request->send(400, "text/plain", "invalid pump");
+            return;
+        }
+
+        int i = pump - 1;
+        String json = "{";
+        json += "\"dayGoal\":" + String(dayGoal[i]) + ",";
+        json += "\"intervalInMillSec\":" + String(intervalInMillSec[i]) + ",";
+        json += "}";
         request->send(200, "application/json", json);
     });
 }
@@ -193,7 +226,7 @@ void setup() {
     timeClient.begin();
 
     // Load saved timestamps and settings from Preferences
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < pumpCount; i++) {
         String keyStamp = "Stamp" + String(i + 1);
         timeStamp[i] = preferences.getULong(keyStamp.c_str(), 0);
         String keyDay = "DayGoal" + String(i + 1);

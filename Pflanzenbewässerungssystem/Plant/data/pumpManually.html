@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pflanzenbewässerungssystem/main</title>
+    <title>Pflanzenbewässerungssystem/pump_manually</title>
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <link id="layoutMode" rel="stylesheet" href="./CSS/modern/modernLayout.css">
     <link id="mode" rel="stylesheet" href="./CSS/modern/modernDark.css">
@@ -14,12 +14,12 @@
 <body>
     <div id="top"></div>
     <header>
-        <a href="./pumpManually.html" class="menuItem">
-            <span class="menuOption">
+        <div class="activeMenuItem">
+            <span class="activeMenuOption">
                 <i class="fa-solid fa-wrench menuOption"></i>
                 Manuell betätigen
             </span>
-        </a>
+        </div>
         <a href="./settings.html" class="menuItem">
             <span class="menuOption">
                 <i class="fa-solid fa-gear menuOption"></i>
@@ -44,12 +44,12 @@
                 Statistiken
             </span>
         </a>
-        <div class="activeMenuItem">
-            <span class="activeMenuOption">
+        <a href="./index.html" class="menuItem">
+            <span class="menuOption">
                 <i class="fa-solid fa-backward menuOption"></i>
                 zurück zur Startseite
             </span>
-        </div>
+        </a>
     </header>
     <div class="subHeader">
         <!-- //Switch darkmode/lightmode and back to top -->
@@ -57,47 +57,17 @@
         <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
     </div>
     <div class="siteBody">
-        <br><br>
-        <h1 class="headingText"><br>Was ist das hier?</h1><br>
+        <h1 class="headingText"><br>Manuell betätigen</h1>
         <p class="text">
-            Dies, ist mein Pflanzenbewässerungssystem das ich entwickelt habe, in zusammenarbeit mit
-            Mr. ChatGPT (~5%), Herr Prof. Oppitz (~5% + 100% der Hardware) und Mario (~25%), ich habe am 13.11.2024 mit diesem Projekt angefangen.
-            Ich bin Schüler einer HTL im 3.Jahr und dies ist das erste C++ Projekt, das ich je gemacht habe. 
-            <br><br>
-            Das Programm lässt sich einfach erweitern, falls eine neue Pumpe dazukommt, oder ähnliches.
-            diese Website ist sozusagen das "README.txt" bzw das manual für dieses Projekt. Gleichzeitig
-            kann man hier auch vieles einstellen, wie den Pumpinterwall und vieles mehr.
-            <br><br>
-            Wenn sie erfahren wollen, wie man den ESP32 installiert, bzw eine Pumpe hinzufügt, dann gehen sie auf 
-            <!-- <a href="https://172.16.18.60/pflanzenbewasserungssystem-dokumentation/"><u>diese Seite</u></a> -->
-            <a href="./instruction.html"><u>diese Seite</u></a>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <br><br>
-            <d☺ hidden>☺♪</d☺>
+            Drücken sie auf einen dieser Buttons um die Pumpe manuell zu betätigen, ACHTUNG: wenn sie
+            die Pumpe betätigen wird der Counter zurückgesetzt außer sie nutzen den Button daneben, welcher
+            die Pumpe betätigt, ohne den Counter zurück zu setzen.
         </p>
+        <div class="useDiv">
+            <div><button id="pump1" class="useIt">Pumpe 1 betätigen</button><button class="useItWisely" id="pump1NoCTR">Ctr nicht zurücksetzen</button><br></div>
+            <div><button id="pump2" class="useIt">Pumpe 2 betätigen</button><button class="useItWisely" id="pump2NoCTR">Ctr nicht zurücksetzen</button><br></div>
+            <div><button id="pump3" class="useIt">Pumpe 3 betätigen</button><button class="useItWisely" id="pump3NoCTR">Ctr nicht zurücksetzen</button><br></div>
+        </div>
     </div>
     <div class="background"></div>
 </body>

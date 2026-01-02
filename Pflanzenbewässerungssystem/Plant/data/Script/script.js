@@ -10,9 +10,7 @@ let editMode;
 let pumps = 3;
 
 fetchAllPumpStats();
-for (let i = 0; i < pumps; i++) {
-    getPumpSettings(i + 1);
-}
+getAllPumpSettings();
 
 let timesPumped = [
     parseInt(localStorage.getItem("timesPumped1")) || 0,
@@ -72,6 +70,7 @@ function init() {
     document.getElementById("lightSwitch").addEventListener("click", () => {darkmodeButton();});
     setColorTheme();
     fetchPumps();
+    getRunningStatus();
 
     //process starten/stoppen
     fetchProcess();
@@ -96,7 +95,6 @@ function fetchPumps() {
     if (pumpNoCtrBtn3 != null) pumpNoCtrBtn3.addEventListener("click", () => { if (!editMode && active) { pumpWithoutCounterReset(3); displayStats(); } });
 }
 
-
 function fetchAllPumpStats() {
     delay1 = localStorage.getItem("delay1");
     delay2 = localStorage.getItem("delay2");
@@ -116,11 +114,12 @@ function fetchProcess() {
         if (processSite != null) processSite.setAttribute("class", "fa-solid fa-toggle-off menuOption");
         active = false;
     }
-    if (processSite != null) processSite.addEventListener("click", () => { activateOrDeactivateProcess(); });
-    if (processBtn != null) processBtn.addEventListener("click", () => { activateOrDeactivateProcess(); });
+    if (processSite != null) processSite.addEventListener("click", () => { activateOrDeactivateProcess(); sendRunningStatusToAllPumps(); });
+    if (processBtn != null) processBtn.addEventListener("click", () => { activateOrDeactivateProcess(); sendRunningStatusToAllPumps(); });
 }
 
 async function pump(number) {
+    await getAllPumpSettings();
     await fetch('/usePump' + number);
     sleep(localStorage.getItem("delay" + number));
     localStorage.setItem("timestamp" + number, new Date().getTime());
@@ -130,22 +129,24 @@ async function pump(number) {
 }
 
 async function pumpWithoutCounterReset(number) {
+    await getAllPumpSettings();
     await fetch('/usePumpNoCtr' + number);
     sleep(localStorage.getItem("delay" + number));
     console.log("PUMPED!!!");
 }
 
-async function getPumpSettings(pump) {
-    await fetch(`/getPump?pump=${pump}`)
-        .then(r => r.json())
-        .then(j => {
-            console.log('fetched', j);
-            localStorage.setItem("timeToWait" + pump, j.days + "");
-            localStorage.setItem("delay" + pump, j.interval + "");
-        })
-        .then(() => fetchAllPumpStats())
-        .then(() => init())
-        .catch(e => console.error('fetch failed', e));
+async function getAllPumpSettings() {
+    for (let pump = 0; pump < pumps; pump++) {
+        await fetch(`/getPump?pump=${pump}`)
+            .then(r => r.json())
+            .then(j => {
+                console.log('fetched' + pump, j);
+                localStorage.setItem("timeToWait" + pump, j.days + "");
+                localStorage.setItem("delay" + pump, j.interval + "");
+            })
+            .then(() => {fetchAllPumpStats(); displayStats();})
+            .catch(e => console.error('fetch failed', e));
+    }
 }
 
 async function sendPumpSettings(pump, days, intervalMs) {
@@ -194,6 +195,22 @@ function fetchDays() {
     if (decreaseTimeBtn3 != null) decreaseTimeBtn3.addEventListener("click", () => { if (editMode) { timeToWait3-- }; displayStats(); });
 }
 
+async function sendRunningStatusToAllPumps() {
+    await fetch(`/setRunningStatus?running=${encodeURIComponent(active ? "1" : "0")}`);
+}
+
+async function getRunningStatus() {
+    await fetch(`/getRunningStatus`)
+        .then(r => r.json())
+        .then(j => {
+            console.log('fetched running status', j);
+            localStorage.setItem("currentProgress", j.running ? "true" : "false");
+        }
+        )
+        .then(() => { fetchProcess(); })
+        .catch(e => console.error('fetch failed', e));
+}
+
 function displayStats() {
     let latestPumpingDisplay1 = document.getElementById("latestPumping1");
     let latestPumpingDisplay2 = document.getElementById("latestPumping2");
@@ -221,20 +238,6 @@ function displayStats() {
     if (timesPumpedDisplay1 != null) timesPumpedDisplay1.innerHTML = timesPumped[0];
     if (timesPumpedDisplay2 != null) timesPumpedDisplay2.innerHTML = timesPumped[1];
     if (timesPumpedDisplay3 != null) timesPumpedDisplay3.innerHTML = timesPumped[2];
-}
-
-async function getMyNumbers(url, displayId) {
-    await fetch(url)
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('response wasn"t ok');
-            }
-            return response.text()
-        })
-        .then(data => {
-            document.getElementById(displayId).innerHTML = data;
-        })
-        .catch(error => console.error('Error:', error));
 }
 
 function darkmodeButton() {

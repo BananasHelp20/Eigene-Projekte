@@ -52,21 +52,27 @@
         </a>
     </header>
     <div class="subHeader">
-        <!-- //Switch darkmode/lightmode and back to top -->
-        <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
-        <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
     </div>
     <div class="siteBody">
-        <br><br>
-        <h1 class="headingText"><br>Prozess</h1>
-        <p class="text">
-            Hier können sie den Prozess stoppen, der Counter wird zwar für die gewisse zeit ausgeschaltet, und aktuallisiert sich in der Ausgeschalteten Form nicht,
-            aber ab dem Moment wo der Prozess weitergeht wird alles, was in der Zeit geschehen ist, nachgeholt; sprich, wenn eine Pumpe in der Zeit pumpen hätte müssen,
-            während der Counter aus war, wird die Pumpe direkt zu pumpen beginnen wenn der ESP32 wieder Online geht.
-        </p>
-        <p>Momentan: <p id="currentlyDoingAnything"></p></p>
-        <div class="prozessDiv">
-            <button id="progress" class="siteButton">Prozess stoppen</button>
+        <div class="leftBody">
+            <br>&emsp;<br>
+        </div>
+        <div class="middleBody">
+            <br><br>
+            <h1 class="headingText"><br>Prozess</h1>
+            <p class="text">
+                Hier können sie den Prozess stoppen, der Counter wird zwar für die gewisse zeit ausgeschaltet, und aktuallisiert sich in der Ausgeschalteten Form nicht,
+                aber ab dem Moment wo der Prozess weitergeht wird alles, was in der Zeit geschehen ist, nachgeholt; sprich, wenn eine Pumpe in der Zeit pumpen hätte müssen,
+                während der Counter aus war, wird die Pumpe direkt zu pumpen beginnen wenn der ESP32 wieder Online geht.
+            </p>
+            <p>Momentan: <p id="currentlyDoingAnything"></p></p>
+            <div class="prozessDiv">
+                <button id="progress" class="siteButton">Prozess stoppen</button>
+            </div>
+        </div>
+        <div class="rightBody">
+            <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
+            <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
         </div>
     </div>
     <div class="background"></div>

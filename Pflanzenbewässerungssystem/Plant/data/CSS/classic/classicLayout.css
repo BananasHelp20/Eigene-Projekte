@@ -12,8 +12,8 @@
 body, html {
     width: 100%;
     height: 100%;
-    padding: 0px;
-    margin: 0px;
+    padding: 0;
+    margin: 0;
 }
 
 body {
@@ -95,29 +95,73 @@ a {
     text-wrap: noWrap;
 }
 
-.siteBody {
-    position: absolute;
-    top: 56.5px;
-    right: 15%;
-    left: 15%;
+.middleBody {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
     padding-left: 5%;
     padding-right: 5%;
+    width: 100%;
     z-index: 1;
 }
 
+.rightBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 40%;
+    z-index: 1;
+}
+
+.leftBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 40%;
+    z-index: 1;
+}
+
+.siteBody {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 0;
+    margin-left: -5%;
+    width: 100%;
+    z-index: 1;
+}
+
+#progress {
+    height: 100px;
+    width: 80%;
+    margin-bottom: 50px;
+    font-size: larger;
+}
+
 #lightSwitch {
-    position: fixed;
-    top: 91%;
-    left: 4%;
-    padding-top: 10px;
-    padding-bottom: 10px;
     border-radius: 10px;
     border-color: black;
     border-style: solid;
     border-width: 2px;
-    width: 140px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 150px;
+    height: 80px;
     font-size: large;
-    height: 100px;
 }
 
 #backToTop {
@@ -132,24 +176,19 @@ a {
 }
 
 #edit {
-    position: fixed;
     text-align: center;
     font-size: 16px;
-    top: 10%;
-    left: 8%;
     padding-top: 10px;
     padding-bottom: 10px;
     width: 150px;
     height: 80px;
     border-radius: 10px;
+    margin-bottom: 10px;
 }
 
 #revert {
-    position: fixed;
     text-align: center;
     font-size: 16px;
-    top: 17%;
-    left: 8%;
     padding-top: 10px;
     padding-bottom: 10px;
     width: 150px;
@@ -186,6 +225,18 @@ a {
     border: 2px solid;
     width: 50%;
     font-size: 17px;
+}
+
+button, a {
+    transition: 200ms;
+}
+
+button:hover, a:hover {
+    transition: 100ms;
+}
+
+button:active, a:active {
+    transition: 200ms;
 }
 
 d☺ {

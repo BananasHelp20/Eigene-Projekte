@@ -130,11 +130,18 @@ footer {
     font-size: 15;
 }
 
-.siteBody {
+.middleBody {
     background-color: var(--site-body-backgroundcolor);
     border: 2px, solid;
     border-radius: 10px;
     border-color: var(--site-body-border-color);
+}
+
+#progress {
+    height: 100px;
+    width: 80%;
+    margin-bottom: 50px;
+    font-size: larger;
 }
 
 .text,

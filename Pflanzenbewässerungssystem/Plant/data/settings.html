@@ -53,57 +53,63 @@
     </header>
     <div class="subHeader">
         <!-- //Switch darkmode/lightmode and back to top -->
-        <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
-        <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
     </div>
     <div class="siteBody">
-        <br><br>
-        <h1 class="headingText">Pumpeneinstellungen</h1>
-        <button class="siteButton" id="edit">Activate Edit Mode</button>
-        <button class="siteButton" id="revert">Revert Editing</button>
-        <div id="pumpDiv">
-            <div class="pump">
-                <h1 class="subHeadingText">Pumpe 1</h1>
-                <div class="text">
-                    Intervall in Tagen: <p id="dayDisplay1"></p>
-                    <button class="activeIncreaseDays" id="increaseDaysPump1">um 1 Tag erhöhen</button>
-                    <br>
-                    <button class="activeDecreaseDays" id="decreaseDaysPump1">um 1 Tag verringern</button>
-                    <br><br>
-                    Dauer in Millisekunden: <p id="delayDisplay1"></p>
-                    <button class="activeIncreaseSec" id="increaseSecPump1">um 0.1 Sekunden erhöhen</button>
-                    <br>
-                    <button class="activeDecreaseSec" id="decreaseSecPump1">um 0.1 Sekunden verringern</button>
+        <div class="leftBody">
+            <button class="siteButton" id="edit">Activate Edit Mode</button>
+            <button class="siteButton" id="revert">Revert Editing</button>
+        </div>
+        <div class="middleBody">
+            <br>
+            <h1 class="headingText">Pumpeneinstellungen</h1>
+            <div id="pumpDiv">
+                <div class="pump">
+                    <h1 class="subHeadingText">Pumpe 1</h1>
+                    <div class="text">
+                        Intervall in Tagen: <p id="dayDisplay1"></p>
+                        <button class="activeIncreaseDays" id="increaseDaysPump1">um 1 Tag erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseDays" id="decreaseDaysPump1">um 1 Tag verringern</button>
+                        <br><br>
+                        Dauer in Millisekunden: <p id="delayDisplay1"></p>
+                        <button class="activeIncreaseSec" id="increaseSecPump1">um 0.1 Sekunden erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseSec" id="decreaseSecPump1">um 0.1 Sekunden verringern</button>
+                    </div>
+                </div>
+                <div class="pump">
+                    <h1 class="subHeadingText">Pumpe 2</h1>
+                    <div class="text">
+                        Intervall in Tagen: <p id="dayDisplay2"></p>
+                        <button class="activeIncreaseDays" id="increaseDaysPump2">um 1 Tag erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseDays" id="decreaseDaysPump2">um 1 Tag verringern</button>
+                        <br><br>
+                        Dauer in Millisekunden: <p id="delayDisplay2"></p>
+                        <button class="activeIncreaseSec" id="increaseSecPump2">um 0.1 Sekunden erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseSec" id="decreaseSecPump2">um 0.1 Sekunden verringern</button>
+                    </div>
+                </div>
+                <div class="pump">
+                    <h1 class="subHeadingText">Pumpe 3</h1>
+                    <div class="text">
+                        Intervall in Tagen: <p id="dayDisplay3"></p>
+                        <button class="activeIncreaseDays" id="increaseDaysPump3">um 1 Tag erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseDays" id="decreaseDaysPump3">um 1 Tag verringern</button>
+                        <br><br>
+                        Dauer in Millisekunden: <p id="delayDisplay3"></p>
+                        <button class="activeIncreaseSec" id="increaseSecPump3">um 0.1 Sekunden erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseSec" id="decreaseSecPump3">um 0.1 Sekunden verringern</button>
+                    </div>
                 </div>
             </div>
-            <div class="pump">
-                <h1 class="subHeadingText">Pumpe 2</h1>
-                <div class="text">
-                    Intervall in Tagen: <p id="dayDisplay2"></p>
-                    <button class="activeIncreaseDays" id="increaseDaysPump2">um 1 Tag erhöhen</button>
-                    <br>
-                    <button class="activeDecreaseDays" id="decreaseDaysPump2">um 1 Tag verringern</button>
-                    <br><br>
-                    Dauer in Millisekunden: <p id="delayDisplay2"></p>
-                    <button class="activeIncreaseSec" id="increaseSecPump2">um 0.1 Sekunden erhöhen</button>
-                    <br>
-                    <button class="activeDecreaseSec" id="decreaseSecPump2">um 0.1 Sekunden verringern</button>
-                </div>
-            </div>
-            <div class="pump">
-                <h1 class="subHeadingText">Pumpe 3</h1>
-                <div class="text">
-                    Intervall in Tagen: <p id="dayDisplay3"></p>
-                    <button class="activeIncreaseDays" id="increaseDaysPump3">um 1 Tag erhöhen</button>
-                    <br>
-                    <button class="activeDecreaseDays" id="decreaseDaysPump3">um 1 Tag verringern</button>
-                    <br><br>
-                    Dauer in Millisekunden: <p id="delayDisplay3"></p>
-                    <button class="activeIncreaseSec" id="increaseSecPump3">um 0.1 Sekunden erhöhen</button>
-                    <br>
-                    <button class="activeDecreaseSec" id="decreaseSecPump3">um 0.1 Sekunden verringern</button>
-                </div>
-            </div>
+        </div>
+        <div class="rightBody">
+            <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
+            <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
         </div>
     </div>
     <div class="background"></div>

@@ -38,6 +38,7 @@ Preferences preferences;
 int dayGoal[3] = {10, 10, 10};                     //ziel an Tagen bis wieder gepumpt wird
 int intervalInMillSec[3] = {1000, 1000, 1000};     //zeit, die gepummt wird in Millisekunden
 int pumpCount = 3;                               //anzahl der pumpen
+bool running = false;                            //ob das bewässerungssystem läuft
 
 /* variables for Time */
 long unsigned int timeStamp[3] = {timeClient.getEpochTime(), timeClient.getEpochTime(), timeClient.getEpochTime()};             //wenn gepumpt wird, wird diese Variable auf die momentane Zeit gesetzt
@@ -89,6 +90,7 @@ void flushAll() {
 
 /** Helper to check cooldown and remaining time (based on dayGoal) */
 bool canUsePump(int pumpNum) {
+    if (!running) return false;
     int i = pumpNum - 1;
     unsigned long now = currentTimeInSec;
     unsigned long allowedAt = timeStamp[i] + (unsigned long)dayGoal[i]; //* SECONDS_PER_DAY;
@@ -135,7 +137,24 @@ void webserverOnUse() {
         });
     }
 
-    webServer.on("/flushAll", HTTP_GET, [](AsyncWebServerRequest *request) {
+    webServer.on("/setRunningStatus", HTTP_GET, [](AsyncWebServerRequest *request) {
+        if (!request->hasParam("running")) {
+            request->send(400, "text/plain", "missing running status");
+            return;
+        }
+        String runningParam = request->getParam("running")->value();
+        running = (runningParam == "1" || runningParam == "true");
+        preferences.putBool("Running", running);
+        request->send(200, "application/json", "{\"ok\":true}");
+    });
+
+    webServer.on("/getRunningStatus", HTTP_GET, [](AsyncWebServerRequest *request) {
+        String json = "{\"running\":" + String(running ? "1" : "0") + "}";
+        request->send(200, "application/json", json);
+    });
+
+    webServer.on("/flushAll", HTTP_GET, [](AsyncWebServerRequest *request)
+                     {
         timeClient.update();
         currentTimeInSec = timeClient.getEpochTime();
         flushAll(); //flush all pumps
@@ -145,7 +164,7 @@ void webserverOnUse() {
             preferences.putULong(keyStamp.c_str(), timeStamp[i]);
         }
         Serial.println("all pumps flushed");
-        request->send(200, "text/plain", "OK");
+        request->send(200, "text/plain", "OK"); 
     });
 
     webServer.on("/setPump", HTTP_GET, [](AsyncWebServerRequest *request) {
@@ -161,7 +180,7 @@ void webserverOnUse() {
 
         int days = request->hasParam("days") ? request->getParam("days")->value().toInt() : dayGoal[pump-1];
         int interval = request->hasParam("interval") ? request->getParam("interval")->value().toInt() : intervalInMillSec[pump-1];
-
+        
         dayGoal[pump - 1] = days;
         intervalInMillSec[pump - 1] = interval;
 
@@ -187,10 +206,7 @@ void webserverOnUse() {
         }
 
         int i = pump - 1;
-        String json = "{";
-        json += "\"dayGoal\":" + String(dayGoal[i]) + ",";
-        json += "\"intervalInMillSec\":" + String(intervalInMillSec[i]) + ",";
-        json += "}";
+        String json = "{\"days\":" + String(dayGoal[i]) + ",\"interval\":" + String(intervalInMillSec[i]) + "}";
         request->send(200, "application/json", json);
     });
 }
@@ -226,6 +242,7 @@ void setup() {
     timeClient.begin();
 
     // Load saved timestamps and settings from Preferences
+    running = preferences.getBool("Running", false);
     for (int i = 0; i < pumpCount; i++) {
         String keyStamp = "Stamp" + String(i + 1);
         timeStamp[i] = preferences.getULong(keyStamp.c_str(), 0);
@@ -253,6 +270,14 @@ void loop() {
     // keep NTP time up to date
     if (timeClient.update()) {
         currentTimeInSec = timeClient.getEpochTime();
+    }
+    if (running) {
+        usePump(intervalInMillSec[0], 1);
+        delay(intervalInMillSec[0]);
+        usePump(intervalInMillSec[1], 2);
+        delay(intervalInMillSec[1]);
+        usePump(intervalInMillSec[2], 3);
+        delay(intervalInMillSec[2]);
     }
     delay(1000);
 }

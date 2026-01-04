@@ -170,7 +170,7 @@ footer {
     color: var(--active-menu-text-color);
 }
 
-#progress {
+#process {
     height: 100px;
     width: 80%;
     margin-bottom: 50px;
@@ -305,38 +305,42 @@ tr {
 .activeIncreaseDays:hover {
     transition: 200ms;
     background-color: var(--hover-start-or-increase-button-green);
+    border-color: var(--hover-start-or-increase-button-green);
 }
 
 .activeIncreaseSec:active,
 .activeIncreaseDays:active {
     transition: 200ms;
     background-color: var(--active-start-or-increase-button-green);
+    border-color: var(--active-start-or-increase-button-green);
 }
 
 .activeDecreaseDays,
 .activeDecreaseSec {
     transition: 200ms;
     background-color: var(--idle-stop-or-decrease-button-red);
-    border-color: var(--red-button-color);
+    border-color: var(--idle-stop-or-decrease-button-red);
 }
 
 .activeIncreaseDays,
 .activeIncreaseSec {
     transition: 200ms;
     background-color: var(--idle-start-or-increase-button-green);
-    border-color: var(--div-border-color);
+    border-color: var(--idle-start-or-increase-button-green);
 }
 
 .activeDecreaseDays:hover,
 .activeDecreaseSec:hover {
     transition: 200ms;
     background-color: var(--hover-stop-or-decrease-button-red);
+    border-color: var(--hover-stop-or-decrease-button-red);
 }
 
 .activeDecreaseDays:active,
 .activeDecreaseSec:active {
     transition: 100ms;
     background-color: var(--active-stop-or-decrease-button-red);
+    border-color: var(--active-stop-or-decrease-button-red);
 }
 
 .inactiveIncreaseSec:hover,

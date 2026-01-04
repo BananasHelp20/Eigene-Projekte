@@ -17,7 +17,8 @@ let delayDisplay = [document.getElementById("delayDisplay1"), document.getElemen
 let revertBtn = document.getElementById('revert');
 let editBtn = document.getElementById("edit");
 let processSite = document.getElementById("progressSite");
-let processBtn = document.getElementById("progress");
+let processBtn = document.getElementById("process");
+let processDisplay = document.getElementById("currentlyDoingAnything");
 
 let pumpBtn = [document.getElementById("pump1"), document.getElementById("pump2"), document.getElementById("pump3")];
 let pumpNoCtrBtn = [document.getElementById("pump1NoCTR"), document.getElementById("pump2NoCTR"), document.getElementById("pump3NoCTR")];
@@ -69,15 +70,19 @@ function fetchPumps() {
 }
 
 function fetchProcess() {
-    if (active) {
-        if (processBtn != null) processBtn.innerHTML = "ACTIVE";
-        if (processSite != null) processSite.setAttribute("class", "fa-solid fa-toggle-on menuOption");
-    } else {
-        if (processBtn != null) processBtn.innerHTML = "INACTIVE";
-        if (processSite != null) processSite.setAttribute("class", "fa-solid fa-toggle-off menuOption");
+    if (processBtn != null && processDisplay != null && processSite != null) {
+        if (active) {
+            processDisplay.innerText = "Das System ist momentan ACTIV und bewässert Pflanzen wie geplant.";
+            processBtn.innerHTML = "Click to DEACTIVATE";
+            processSite.setAttribute("class", "fa-solid fa-toggle-on menuOption");
+        } else {
+            processDisplay.innerText = "Das System ist momentan INACTIV und bewässert keine Pflanzen.";
+            processBtn.innerHTML = "Click to ACTIVATE";
+            processSite.setAttribute("class", "fa-solid fa-toggle-off menuOption");
+        }
+        processSite.addEventListener("click", () => { activateOrDeactivateProcess(); sendRunningStatusToAllPumps(); });
+        processBtn.addEventListener("click", () => { activateOrDeactivateProcess(); sendRunningStatusToAllPumps(); });
     }
-    if (processSite != null) processSite.addEventListener("click", () => { activateOrDeactivateProcess(); sendRunningStatusToAllPumps(); });
-    if (processBtn != null) processBtn.addEventListener("click", () => { activateOrDeactivateProcess(); sendRunningStatusToAllPumps(); });
 }
 
 async function pump(number) {
@@ -206,30 +211,30 @@ function displayStats() {
 function darkmodeButton() {
     if (localStorage.getItem("lightSwitch") == "0") {
         localStorage.setItem("lightSwitch", "1");
-    } else if (localStorage.getItem("lightSwitch") == "1") {
+    } /*else if (localStorage.getItem("lightSwitch") == "1") {
         localStorage.setItem("lightSwitch", "2");
     } else if (localStorage.getItem("lightSwitch") == "2") {
         localStorage.setItem("lightSwitch", "3");
-    } else {
+    } */else {
         localStorage.setItem("lightSwitch", "0");
     }
     setColorTheme();
 }
 
 function setColorTheme() {
-    if (localStorage.getItem("lightSwitch") == "2") {
+    if (localStorage.getItem("lightSwitch") == "0") {
         document.getElementById('layoutMode').setAttribute('href', './CSS/classic/classicLayout.css');
         document.getElementById('mode').setAttribute('href', './CSS/classic/classicDark.css');
     } else if (localStorage.getItem("lightSwitch") == "1") {
         document.getElementById('layoutMode').setAttribute('href', './CSS/classic/classicLayout.css');
         document.getElementById('mode').setAttribute('href', './CSS/classic/classicBright.css');
-    } else if (localStorage.getItem("lightSwitch") == "3") {
+    } /*else if (localStorage.getItem("lightSwitch") == "2") {
         document.getElementById('layoutMode').setAttribute('href', './CSS/modern/modernLayout.css');
         document.getElementById('mode').setAttribute('href', './CSS/modern/modernDark.css');
-    } else if (localStorage.getItem("lightSwitch") == "0") {
+    } else if (localStorage.getItem("lightSwitch") == "3") {
         document.getElementById('layoutMode').setAttribute('href', './CSS/modern/modernLayout.css');
         document.getElementById('mode').setAttribute('href', './CSS/modern/modernBright.css');
-    }
+    }*/
 }
 
 function activateOrDeactivateEditMode() {
@@ -281,12 +286,16 @@ function saveAndSendAllPumpSettings() {
 
 function activateOrDeactivateProcess() {
     active = !active;
-    if (active) {
-        processBtn.innerHTML = "ACTIVE";
-        processSite.setAttribute("class", "fa-solid fa-toggle-on menuOption");
-    } else {
-        processBtn.innerHTML = "INACTIVE";
-        processSite.setAttribute("class", "fa-solid fa-toggle-off menuOption");
+    if (processBtn != null && processDisplay != null && processSite != null) {
+        if (active) {
+            processDisplay.innerText = "Das System ist momentan ACTIV.";
+            processBtn.innerHTML = "Click to DEACTIVATE";
+            processSite.setAttribute("class", "fa-solid fa-toggle-on menuOption");
+        } else {
+            processDisplay.innerText = "Das System ist momentan INACTIV.";
+            processBtn.innerHTML = "Click to ACTIVATE";
+            processSite.setAttribute("class", "fa-solid fa-toggle-off menuOption");
+        }
     }
 }
 

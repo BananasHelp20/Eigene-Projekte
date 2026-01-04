@@ -101,14 +101,98 @@ a {
     text-wrap: noWrap;
 }
 
-.siteBody {
-    position: absolute;
-    top: 100px;
-    right: 15%;
-    left: 15%;
+.middleBody {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
     padding-left: 5%;
     padding-right: 5%;
+    width: 100%;
     z-index: 1;
+}
+
+.rightBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 20%;
+    z-index: 1;
+}
+
+.leftBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 20%;
+    z-index: 1;
+}
+
+.siteBody {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 0;
+    margin-left: -5%;
+    width: 100%;
+    z-index: 1;
+}
+
+#lightSwitch {
+    border-radius: 10px;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 150px;
+    height: 80px;
+    font-size: large;
+}
+
+#backToTop {
+    position: fixed;
+    text-align: center;
+    font-size: xxx-large;
+    top: 91%;
+    right: 4%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 80px;
+}
+
+#edit {
+    text-align: center;
+    font-size: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 150px;
+    height: 80px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#revert {
+    text-align: center;
+    font-size: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 150px;
+    height: 80px;
+    border-radius: 10px;
 }
 
 .startStop {
@@ -126,10 +210,14 @@ a {
     text-align: center;
 }
 
-.increaseDays,
-.decreaseDays,
-.increaseSec,
-.decreaseSec {
+.activeIncreaseDays,
+.activeDecreaseDays,
+.activeIncreaseSec,
+.activeDecreaseSec,
+.inactiveIncreaseDays,
+.inactiveDecreaseDays,
+.inactiveIncreaseSec,
+.inactiveDecreaseSec {
     padding: 10px;
     margin: 3px;
     border-radius: 10px;
@@ -140,6 +228,21 @@ a {
 
 d☺ {
     color: aqua;
+}
+
+button,
+a {
+    transition: 200ms;
+}
+
+button:hover,
+a:hover {
+    transition: 100ms;
+}
+
+button:active,
+a:active {
+    transition: 200ms;
 }
 
 .useIt,

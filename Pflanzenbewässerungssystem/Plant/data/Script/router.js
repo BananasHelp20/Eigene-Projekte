@@ -1,5 +1,5 @@
 function sendPumpSignal(number, duration) {
-    fetch('/pump', {
+    fetch('/api/pump', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -9,7 +9,7 @@ function sendPumpSignal(number, duration) {
 }
 
 function sendPumpSignalWithoutCounterChange(number, duration) {
-    fetch('/pump/no-counter', {
+    fetch('/api/pump/no-counter', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ function sendPumpSignalWithoutCounterChange(number, duration) {
 }
 
 function setNewDuration(number, duration) {
-    fetch('/setDuration', {
+    fetch('/api/setDuration', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ function setNewDuration(number, duration) {
 }
 
 function setNewInterval(number, interval) {
-    fetch('/setInterval', {
+    fetch('/api/setInterval', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -39,7 +39,7 @@ function setNewInterval(number, interval) {
 }
 
 async function getData() {
-    const response = await fetch('/data');
+    const response = await fetch('/api/getData');
     const data = await response.json();
     return data;
 }

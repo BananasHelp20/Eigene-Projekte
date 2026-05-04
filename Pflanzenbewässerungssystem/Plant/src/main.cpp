@@ -35,9 +35,9 @@ Preferences preferences;
 /** Variables */
 
 /** Pump variables */
-int dayGoal[3] = {10, 10, 10};                     //ziel an Tagen bis wieder gepumpt wird
+int dayGoal[3] = {1, 1, 1};                     //ziel an Tagen bis wieder gepumpt wird
 int intervalInMillSec[3] = {1000, 1000, 1000};     //zeit, die gepummt wird in Millisekunden
-int pumpCount = 3;                               //anzahl der pumpen
+int pumpCount = sizeof(dayGoal) / sizeof(dayGoal[0]);                               //anzahl der pumpen
 bool running = false;                            //ob das bewässerungssystem läuft
 
 /* variables for Time */
@@ -47,6 +47,11 @@ long unsigned int currentTimeInSec = timeClient.getEpochTime();                 
 constexpr unsigned long SECONDS_PER_DAY = 24UL * 60UL * 60UL;                           // = 86400
 
 /** Methods */
+
+int getArLength(int Ar[]) {
+    int length = sizeof(Ar) / sizeof(Ar[0]);
+    return length;
+}
 
 /** betätigt die Pumpe (X) für (X) Millisekunden */
 void usePump(int seconds, int pumpNum) {
@@ -89,130 +94,12 @@ void flushAll() {
 }
 
 /** Helper to check cooldown and remaining time (based on dayGoal) */
-bool canUsePump(int pumpNum) {
-    if (!running) return false;
-    int i = pumpNum - 1;
-    unsigned long now = currentTimeInSec;
-    unsigned long allowedAt = timeStamp[i] + (unsigned long)dayGoal[i]; //* SECONDS_PER_DAY;
-    return now >= allowedAt;
-}
-
-unsigned long remainingSeconds(int pumpNum) {
-    int i = pumpNum - 1;
-    unsigned long now = currentTimeInSec;
-    unsigned long allowedAt = timeStamp[i] + (unsigned long)dayGoal[i]; //* SECONDS_PER_DAY;
-    if (now >= allowedAt) return 0;
-    return allowedAt - now;
-}
-
-void webserverOnUse() {
-    String uri;
-    String key;
-    for (int i = 0; i < pumpCount; i++)
-    {
-        uri = "/usePump" + String(i + 1);
-        key = "Stamp" + String(i + 1);
-
-        webServer.on(uri.c_str(), HTTP_GET, [i, key](AsyncWebServerRequest *request) {
-            timeClient.update();
-            currentTimeInSec = timeClient.getEpochTime();
-            usePump(intervalInMillSec[i], i + 1);
-            timeStamp[i] = currentTimeInSec;
-            preferences.putULong(key.c_str(), timeStamp[i]);
-
-            Serial.println("pump" + String(i + 1) + " was used");
-            request->send(200, "text/plain", "OK"); 
-        });
-    }
-
-    for (int i = 0; i < pumpCount; i++) 
-    {
-        uri = "/usePumpNoCtr" + String(i + 1);
-
-        webServer.on(uri.c_str(), HTTP_GET, [i](AsyncWebServerRequest *request) {
-            usePump(intervalInMillSec[i], i + 1);
-
-            Serial.println("pump" + String(i + 1) + " was used");
-            request->send(200, "text/plain", "OK");
-        });
-    }
-
-    webServer.on("/setRunningStatus", HTTP_GET, [](AsyncWebServerRequest *request) {
-        if (!request->hasParam("running")) {
-            request->send(400, "text/plain", "missing running status");
-            return;
-        }
-        String runningParam = request->getParam("running")->value();
-        running = (runningParam == "1" || runningParam == "true");
-        preferences.putBool("Running", running);
-        request->send(200, "application/json", "{\"ok\":true}");
-    });
-
-    webServer.on("/getRunningStatus", HTTP_GET, [](AsyncWebServerRequest *request) {
-        String json = "{\"running\":" + String(running ? "1" : "0") + "}";
-        request->send(200, "application/json", json);
-    });
-
-    webServer.on("/flushAll", HTTP_GET, [](AsyncWebServerRequest *request)
-                     {
-        timeClient.update();
-        currentTimeInSec = timeClient.getEpochTime();
-        flushAll(); //flush all pumps
-        for (int i = 0; i < pumpCount; i++) {
-            timeStamp[i] = currentTimeInSec;
-            String keyStamp = "Stamp" + String(i + 1);
-            preferences.putULong(keyStamp.c_str(), timeStamp[i]);
-        }
-        Serial.println("all pumps flushed");
-        request->send(200, "text/plain", "OK"); 
-    });
-
-    webServer.on("/setPump", HTTP_GET, [](AsyncWebServerRequest *request) {
-        if (!request->hasParam("pump")) {
-            request->send(400, "text/plain", "missing pump");
-            return;
-        }
-        int pump = request->getParam("pump")->value().toInt();
-        if (pump < 1 || pump > pumpCount) {
-            request->send(400, "text/plain", "invalid pump");
-            return;
-        }
-
-        int days = request->hasParam("days") ? request->getParam("days")->value().toInt() : dayGoal[pump-1];
-        int interval = request->hasParam("interval") ? request->getParam("interval")->value().toInt() : intervalInMillSec[pump-1];
-        
-        dayGoal[pump - 1] = days;
-        intervalInMillSec[pump - 1] = interval;
-
-        String keyDay = "DayGoal" + String(pump);
-        String keyInterval = "Interval" + String(pump);
-
-        preferences.putInt(keyDay.c_str(), days);
-        preferences.putInt(keyInterval.c_str(), interval);
-
-        request->send(200, "application/json", String("{\"ok\":true,\"pump\":") + pump + "}");
-    });
-
-    webServer.on("/getPump", HTTP_GET, [](AsyncWebServerRequest *request) {
-        if (!request->hasParam("pump")) {
-            request->send(400, "text/plain", "missing pump");
-            return;
-        }
-
-        int pump = request->getParam("pump")->value().toInt();
-        if (pump < 1 || pump > pumpCount) {
-            request->send(400, "text/plain", "invalid pump");
-            return;
-        }
-
-        int i = pump - 1;
-        String json = "{\"days\":" + String(dayGoal[i]) + ",\"interval\":" + String(intervalInMillSec[i]) + "}";
-        request->send(200, "application/json", json);
-    });
+void webRouts() { //initialize webrouts to frontend
+    
 }
 
 /** Setup (macht der 1 mal beim Einschalten) */
-void setup() {
+void setup() { //setup local storage, webserver routes, get variables from local storage (if )...
     Serial.begin(115200);
     delay(1000);
     preferences.begin("PlantSystem", false);
@@ -221,63 +108,9 @@ void setup() {
     pinMode(PUMP2, OUTPUT);
     pinMode(PUMP3, OUTPUT);
 
-    Serial.println("Initializing SPIFFS...");
-    if (!SPIFFS.begin(true)) {
-        Serial.println("An Error has occurred while mounting SPIFFS");
-        return;
-    }
-    webServer.serveStatic("/", SPIFFS, "/").setDefaultFile("index.html");
-
-    // Connect to Wi-Fi network with SSID and password
-    Serial.print("Connecting to ");
-    Serial.println(ssid);
-    WiFi.begin(ssid, password);
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-    }
-
-    Serial.println();
-    webServer.begin();
-    timeClient.begin();
-
-    // Load saved timestamps and settings from Preferences
-    running = preferences.getBool("Running", false);
-    for (int i = 0; i < pumpCount; i++) {
-        String keyStamp = "Stamp" + String(i + 1);
-        timeStamp[i] = preferences.getULong(keyStamp.c_str(), 0);
-        String keyDay = "DayGoal" + String(i + 1);
-        dayGoal[i] = preferences.getInt(keyDay.c_str(), dayGoal[i]);
-        String keyInterval = "Interval" + String(i + 1);
-        intervalInMillSec[i] = preferences.getInt(keyInterval.c_str(), intervalInMillSec[i]);
-    }
-
     // Register web endpoints
-    webserverOnUse();
-
-    // Ensure we have a time value
-    timeClient.update();
-    currentTimeInSec = timeClient.getEpochTime();
-
-    // Print local IP address and start web server
-    Serial.println("WiFi connected.");
-    Serial.println("IP address: ");
-    Serial.println(WiFi.localIP());
-    MDNS.begin("plant.willi");
+    webRouts();
 }
 
 void loop() {
-    // keep NTP time up to date
-    if (timeClient.update()) {
-        currentTimeInSec = timeClient.getEpochTime();
-    }
-    if (running) {
-        usePump(intervalInMillSec[0], 1);
-        delay(intervalInMillSec[0]);
-        usePump(intervalInMillSec[1], 2);
-        delay(intervalInMillSec[1]);
-        usePump(intervalInMillSec[2], 3);
-        delay(intervalInMillSec[2]);
-    }
-    delay(1000);
 }

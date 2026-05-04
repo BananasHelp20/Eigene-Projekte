@@ -305,42 +305,66 @@ tr {
     cursor: cell;
 }
 
-.increaseSec:hover,
-.increaseDays:hover {
+.activeIncreaseSec:hover,
+.activeIncreaseDays:hover {
     background-color: var(--hover-start-or-increase-button-green);
 }
 
-.increaseSec:active,
-.increaseDays:active {
+.activeIncreaseSec:active,
+.activeIncreaseDays:active {
     background-color: var(--active-start-or-increase-button-green);
 }
 
-.decreaseDays,
-.decreaseSec {
+.activeDecreaseDays,
+.activeDecreaseSec {
     background-color: var(--idle-stop-or-decrease-button-red);
+    border-color: var(--red-button-color);
 }
 
-.increaseDays,
-.increaseSec {
+.activeIncreaseDays,
+.activeIncreaseSec {
     background-color: var(--idle-start-or-increase-button-green);
-}
-
-.decreaseDays:hover,
-.decreaseSec:hover {
-    background-color: var(--hover-stop-or-decrease-button-red);
-}
-
-.decreaseDays:active,
-.decreaseSec:active {
-    background-color: var(--active-stop-or-decrease-button-red);
-}
-
-.increaseDays,
-.increaseSec {
     border-color: var(--div-border-color);
 }
 
-.decreaseDays,
-.decreaseSec {
+.activeDecreaseDays:hover,
+.activeDecreaseSec:hover {
+    background-color: var(--hover-stop-or-decrease-button-red);
+}
+
+.activeDecreaseDays:active,
+.activeDecreaseSec:active {
+    background-color: var(--active-stop-or-decrease-button-red);
+}
+
+.inactiveIncreaseSec:hover,
+.inactiveIncreaseDays:hover {
+    background-color: var(--menu-hover-color);
+}
+
+.inactiveIncreaseSec:active,
+.inactiveIncreaseDays:active {
+    background-color: var(--menu-active-color);
+}
+
+.inactiveDecreaseDays,
+.inactiveDecreaseSec {
+    background-color: var(--menu-idle-color);
     border-color: var(--red-button-color);
+}
+
+.inactiveIncreaseDays,
+.inactiveIncreaseSec {
+    background-color: var(--menu-idle-color);
+    border-color: var(--div-border-color);
+}
+
+.inactiveDecreaseDays:hover,
+.inactiveDecreaseSec:hover {
+    background-color: var(--menu-hover-color);
+}
+
+.inactiveDecreaseDays:active,
+.inactiveDecreaseSec:active {
+    background-color: var(--menu-active-color);
 }

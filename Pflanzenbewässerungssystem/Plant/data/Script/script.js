@@ -1,4 +1,4 @@
-let durations = []; // Array for all 3 pumps
+let durations = []; // Array for all 3 pumps6
 let editmode = true;
 
 function init() {

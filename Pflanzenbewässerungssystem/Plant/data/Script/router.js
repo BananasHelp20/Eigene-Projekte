@@ -8,6 +8,12 @@ function sendPumpSignal(number, duration) {
     });
 }
 
+function getPumpCount() {
+    return fetch('/api/pumpCount')
+        .then(response => response.json())
+        .then(data => data.count);
+}
+
 function sendPumpSignalWithoutCounterChange(number, duration) {
     fetch('/api/pump/no-counter', {
         method: 'POST',

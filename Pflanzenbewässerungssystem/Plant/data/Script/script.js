@@ -1,64 +1,66 @@
-let duration1 = 1000;
-let editmode = false;
+let durations = []; // Array for all 3 pumps
+let editmode = true;
 
 function init() {
-    document.getElementById("pump1").addEventListener("click", () => {
-        pump(1, duration1, true);
+    getPumpCount().then((count) => {
+        //createPumps(count);
+        initializePumps(count);
     });
-
-    document.getElementById("pumpNoCtr1").addEventListener("click", () => {
-        pump(1, duration1, false);
-    });
-
-    document.getElementById("increaseSeconds1").addEventListener("click", () => {
-        if (getEditMode()) changeDuration(1, 1000);
-    });
-
-    document.getElementById("decreaseSeconds1").addEventListener("click", () => {
-        if (getEditMode()) changeDuration(1, -1000);
-    });
-
-    document.getElementById("increaseDays1").addEventListener("click", () => {
-        if (getEditMode()) changeInterval(1, 1);
-    });
-
-    document.getElementById("decreaseDays1").addEventListener("click", () => {
-        if (getEditMode()) changeInterval(1, -1);
-    });
-
-    document.getElementById("edit").addEventListener("click", (event) => {
-        editmode = !editmode;
-        if (!editmode) {
-            event.target.innerText = "Edit Settings";
-        } else {
-            event.target.innerText = "Save Settings";
+    let pumpObjects;
+    getData().then((data) => {
+        pumpObjects = data;
+        for (let i = 0; i < pumpObjects.length; i++) {
+            durations.push(pumpObjects[i].duration);
         }
-        setEditMode(editmode);
-    })
+
+    });
+
+    document.getElementById("edit")?.addEventListener("click", (event) => {
+        editmode = !editmode;
+        event.target.innerText = editmode ? "Save Settings" : "Edit Settings";
+    });
 }
 
-function pump(pumpNumber, duration, resetCounter) {
-    if (resetCounter) {
-        sendPumpSignal(pumpNumber, duration);
-    } else {
-        sendPumpSignalWithoutCounterChange(pumpNumber, duration);
+function initializePumps(count) {
+    for (let i = 1; i <= count; i++) {
+        document.getElementById(`pump${i}`)?.addEventListener("click", () => {
+            sendPumpSignal(i, durations[i - 1]);
+        });
+
+        document.getElementById(`pumpNoCtr${i}`)?.addEventListener("click", () => {
+            sendPumpSignalWithoutCounterChange(i, durations[i - 1]);
+        });
+
+        document.getElementById(`increaseSeconds${i}`)?.addEventListener("click", () => {
+            if (getEditMode()) changeDuration(i, 1000);
+        });
+
+        document.getElementById(`decreaseSeconds${i}`)?.addEventListener("click", () => {
+            if (getEditMode()) changeDuration(i, -1000);
+        });
+
+        document.getElementById(`increaseDays${i}`)?.addEventListener("click", () => {
+            if (getEditMode()) changeInterval(i, 1);
+        });
+
+        document.getElementById(`decreaseDays${i}`)?.addEventListener("click", () => {
+            if (getEditMode()) changeInterval(i, -1);
+        });
     }
 }
 
-function changeDuration(pumpNumber, durationChange) { //duration wird lokal gespeichert, falls auf "pump" gedrückt wird, ohne das des async signal ausgetauscht worden is, und dann de alte duration genommen wird
-    duration1 += durationChange;
-    setNewDuration(pumpNumber, duration1);
+function changeDuration(pumpNumber, durationChange) {
+    durations[pumpNumber - 1] += durationChange;
+    setNewDuration(pumpNumber, durations[pumpNumber - 1]);
 }
 
-function changeInterval(pumpNumber, intervalChange) { //beim intervall wird eh imma vom server aus gepumpt, do bringts ma nix wenn i des im Frontend speichere.
+function changeInterval(pumpNumber, intervalChange) {
     setNewInterval(pumpNumber, intervalChange);
 }
 
-function getEditMode() { //momentan nu de propertie, oba könnte a gesendet werden und so shit.
+function getEditMode() {
     return editmode;
 }
 
-function setEditMode(edit) {
-    editmode = edit;
-    // sendEditMode(edit);
-}
+init();
+console.log("Script loaded");

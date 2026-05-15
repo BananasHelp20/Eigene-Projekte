@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pflanzenbewässerungssystem/main</title>
+    <title>Pflanzenbewässerungssystem/manage_process</title>
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <link id="layoutMode" rel="stylesheet" href="./CSS/classic/classicLayout.css">
     <link id="mode" rel="stylesheet" href="./CSS/classic/classicDark.css">
@@ -30,12 +30,12 @@
                 Einstellungen
             </span>
         </a>
-        <a href="./manageProcess.html" class="menuItem">
-            <span class="menuOption">
+        <div class="activeMenuItem">
+            <span class="activeMenuOption">
                 <i id="progressSite" class="fa-solid fa-toggle-on menuOption"><!--oder "fa-solid fa-toggle-off" --></i>
                 Ein- und ausschalten
             </span>
-        </a>
+        </div>
         <a href="./wateredPlants.html" class="menuItem">
             <span class="menuOption">
                 <i class="fa-solid fa-seedling menuOption"></i>
@@ -48,12 +48,12 @@
                 Statistiken
             </span>
         </a>
-        <div class="activeMenuItem">
-            <span class="activeMenuOption">
+        <a href="./index.html" class="menuItem">
+            <span class="menuOption">
                 <i class="fa-solid fa-backward menuOption"></i>
                 zurück zur Startseite
             </span>
-        </div>
+        </a>
     </header>
     <div class="subHeader">
     </div>
@@ -63,33 +63,16 @@
         </div>
         <div class="middleBody">
             <br><br>
-            <h1 class="headingText"><br>Was ist das hier?</h1><br>
+            <h1 class="headingText"><br>Prozess</h1>
             <p class="text">
-                Dies, ist mein Pflanzenbewässerungssystem das ich entwickelt habe, in zusammenarbeit mit
-                Mr. ChatGPT (~5%), Herr Prof. Oppitz (~5% + 100% der Hardware) und Mario (~25%), ich habe am 13.11.2024 mit diesem Projekt angefangen.
-                Ich bin Schüler einer HTL im 3.Jahr und dies ist das erste C++ Projekt, das ich je gemacht habe. 
-                <br><br>
-                Das Programm lässt sich einfach erweitern, falls eine neue Pumpe dazukommt, oder ähnliches.
-                diese Website ist sozusagen das "README.txt" bzw das manual für dieses Projekt. Gleichzeitig
-                kann man hier auch vieles einstellen, wie den Pumpinterwall und vieles mehr.
-                <br><br>
-                Wenn sie erfahren wollen, wie man den ESP32 installiert, bzw eine Pumpe hinzufügt, dann gehen sie auf 
-                <!-- <a href="https://172.16.18.60/pflanzenbewasserungssystem-dokumentation/"><u>diese Seite</u></a> -->
-                <a href="./instruction.html"><u>diese Seite</u></a>
-                <br>
-                <br>
-                <img src="https://i.imgflip.com/arw1x2.jpg" title="made at imgflip.com"/>
-                <br><br>
-                <br><br>
-                <br><br>
-                <br><br>
-                <br><br>
-                <br><br>
-                <br><br>
-                <br><br>
-                <br><br>
-                <d☺ hidden>☺♪</d☺>
+                Hier können sie den Prozess stoppen, der Counter wird zwar für die gewisse zeit ausgeschaltet, und aktuallisiert sich in der Ausgeschalteten Form nicht,
+                aber ab dem Moment wo der Prozess weitergeht wird alles, was in der Zeit geschehen ist, nachgeholt; sprich, wenn eine Pumpe in der Zeit pumpen hätte müssen,
+                während der Counter aus war, wird die Pumpe direkt zu pumpen beginnen wenn der ESP32 wieder Online geht.
             </p>
+            <p>Momentan: <p id="currentlyDoingAnything"></p></p>
+            <div class="prozessDiv">
+                <button id="progress" class="siteButton">Prozess stoppen</button>
+            </div>
         </div>
         <div class="rightBody">
             <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>

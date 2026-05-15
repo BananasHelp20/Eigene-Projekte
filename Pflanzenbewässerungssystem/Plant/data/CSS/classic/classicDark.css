@@ -11,6 +11,27 @@
     --menu-hover-color: rgb(58, 58, 58);
     --menu-idle-color: rgb(34, 34, 34);
 
+    --button-active-color: rgb(61, 61, 61);
+    --button-hover-color: rgb(55, 55, 55);
+    --button-idle-color: rgb(41, 41, 41);
+
+    --active-stop-or-decrease-button-red: rgb(190, 0, 0);
+    --hover-stop-or-decrease-button-red: rgb(168, 11, 0);
+    --idle-stop-or-decrease-button-red: rgb(150, 0, 0);
+    
+    --idle-start-or-increase-button-green: rgb(55, 114, 0);
+    --hover-start-or-increase-button-green: rgb(63, 141, 0);
+    --active-start-or-increase-button-green: rgb(87, 180, 0);
+
+    --active-button-active-color: rgb(34, 34, 34);
+    --active-button-hover-color: rgb(0, 168, 168);
+    --active-button-idle-color: darkcyan;
+    --active-button-border-color: rgb(34, 34, 34);
+
+    --inactive-button-idle-color: rgb(24, 24, 24);
+
+    --button-border-color: darkcyan;
+
     --menu-border-color: darkcyan;
     --menu-backroundcolor: rgba(95, 158, 160, 0.53);
     
@@ -30,6 +51,50 @@
     --text-color: rgb(172, 172, 172);
 
     --div-border-color: rgb(0, 104, 104);
+}
+
+.background {
+    background-image: url(../../images/classic/backgroundImage2.jpg);
+}
+
+.siteButton {
+    background: var(--button-idle-color);
+    border: solid var(--button-border-color) 2px;
+    color: var(--button-border-color);
+}
+
+.activeSiteButton {
+    background: var(--active-button-idle-color);
+    border: solid var(--active-button-border-color) 2px;
+    color: var(--active-button-border-color);
+}
+
+.siteButton:hover {
+    background: var(--button-hover-color);
+}
+
+.activeSiteButton:hover {
+    background: var(--active-button-hover-color);
+}
+
+.activeSiteButton:active {
+    color: darkcyan;
+    border-color: darkcyan;
+    background: var(--active-button-active-color);
+}
+
+.siteButton:active {
+    background: var(--button-active-color);
+}
+
+.inactiveSiteButton {
+    background-color: var(--inactive-button-idle-color);
+    border: solid var(--button-border-color) 2px;
+    color: var(--button-border-color);
+}
+
+.inactiveSiteButton i {
+    color: var(--button-border-color);
 }
 
 * {
@@ -60,7 +125,7 @@ footer {
     font-size: 15;
 }
 
-.siteBody {
+.middleBody {
     background-color: var(--body-backgroundcolor);
     border: 2px, solid;
     border-radius: 10px;
@@ -103,6 +168,13 @@ footer {
 .menuItem:active span i {
     border-color: var(--active-menu-text-color);
     color: var(--active-menu-text-color);
+}
+
+#progress {
+    height: 100px;
+    width: 80%;
+    margin-bottom: 50px;
+    font-size: larger;
 }
 
 #lightSwitch {
@@ -229,30 +301,78 @@ tr {
     cursor: cell;
 }
 
-.increaseSec:hover, .increaseDays:hover {
-    background-color: var(--hover-green);
+.activeIncreaseSec:hover,
+.activeIncreaseDays:hover {
+    transition: 200ms;
+    background-color: var(--hover-start-or-increase-button-green);
 }
 
-.increaseSec:active, .increaseDays:active {
-    background-color: var(--active-green);
+.activeIncreaseSec:active,
+.activeIncreaseDays:active {
+    transition: 200ms;
+    background-color: var(--active-start-or-increase-button-green);
 }
 
-.decreaseDays, .decreaseSec {
-    background-color: var(--idle-red);
+.activeDecreaseDays,
+.activeDecreaseSec {
+    transition: 200ms;
+    background-color: var(--idle-stop-or-decrease-button-red);
+    border-color: var(--red-button-color);
 }
 
-.increaseDays, .increaseSec {
-    background-color: var(--idle-green);
-}
-
-.decreaseDays:hover, .decreaseSec:hover {
-    background-color: var(--hover-red);
-}
-
-.decreaseDays:active, .decreaseSec:active {
-    background-color: var(--active-red);
-}
-
-.increaseDays, .decreaseDays, .increaseSec, .decreaseSec {
+.activeIncreaseDays,
+.activeIncreaseSec {
+    transition: 200ms;
+    background-color: var(--idle-start-or-increase-button-green);
     border-color: var(--div-border-color);
+}
+
+.activeDecreaseDays:hover,
+.activeDecreaseSec:hover {
+    transition: 200ms;
+    background-color: var(--hover-stop-or-decrease-button-red);
+}
+
+.activeDecreaseDays:active,
+.activeDecreaseSec:active {
+    transition: 100ms;
+    background-color: var(--active-stop-or-decrease-button-red);
+}
+
+.inactiveIncreaseSec:hover,
+.inactiveIncreaseDays:hover {
+    transition: 200ms;
+    background-color: var(--menu-hover-color);
+}
+
+.inactiveIncreaseSec:active,
+.inactiveIncreaseDays:active {
+    transition: 100ms;
+    background-color: var(--menu-active-color);
+}
+
+.inactiveDecreaseDays,
+.inactiveDecreaseSec {
+    transition: 100ms;
+    background-color: var(--menu-idle-color);
+    border-color: var(--red-button-color);
+}
+
+.inactiveIncreaseDays,
+.inactiveIncreaseSec {
+    transition: 100ms;
+    background-color: var(--menu-idle-color);
+    border-color: var(--div-border-color);
+}
+
+.inactiveDecreaseDays:hover,
+.inactiveDecreaseSec:hover {
+    transition: 200ms;
+    background-color: var(--menu-hover-color);
+}
+
+.inactiveDecreaseDays:active,
+.inactiveDecreaseSec:active {
+    transition: 100ms;
+    background-color: var(--menu-active-color);
 }

@@ -1,4 +1,4 @@
-function displayStats() {
+function displayStats(count) {
     let latestPumpingDisplays = document.getElementById(`latestPumping`);
 
     let timesPumpedDisplay1 = document.getElementById("displayAmountPumped1");
@@ -15,7 +15,7 @@ function displayStats() {
     if (timesPumpedDisplay3 != null) timesPumpedDisplay3.innerHTML = timesPumped[2];
 }
 
-function deactivateButtons() {
+function deactivateButtons(count) {
     if (revertBtn != null) revertBtn.setAttribute("class", "inactiveSiteButton");
 
     for (let i = 1; i <= count; i++) {
@@ -24,10 +24,10 @@ function deactivateButtons() {
         if (document.getElementById(`increaseDaysPump${i}`) != null) document.getElementById(`increaseDaysPump${i}`).setAttribute("class", "inactiveIncreaseDays");
         if (document.getElementById(`decreaseDaysPump${i}`) != null) document.getElementById(`decreaseDaysPump${i}`).setAttribute("class", "inactiveDecreaseDays");
     }
-    lockButtons();
+    lockButtons(count);
 }
 
-function lockButtons() {
+function lockButtons(count) {
     if (revertBtn != null) revertBtn.innerHTML = '<i class="fa-solid fa-lock"></i>' + " " + revertBtn.innerHTML;
 
     for (let i = 1; i <= count; i++) {
@@ -38,7 +38,7 @@ function lockButtons() {
     }
 }
 
-function unlockButtons() {
+function unlockButtons(count) {
     if (revertBtn != null) revertBtn.innerHTML = revertText;
     for (let i = 1; i <= count; i++) {
         if (document.getElementById(`increaseSecPump${i}`) != null) document.getElementById(`increaseSecPump${i}`).innerHTML = increaseSecText;
@@ -48,7 +48,7 @@ function unlockButtons() {
     }
 }
 
-function activateButtons() {
+function activateButtons(count) {
     if (revertBtn != null) revertBtn.setAttribute("class", "siteButton");
 
     for (let i = 1; i <= count; i++) {
@@ -57,5 +57,5 @@ function activateButtons() {
         if (document.getElementById(`increaseDaysPump${i}`) != null) document.getElementById(`increaseDaysPump${i}`).setAttribute("class", "activeIncreaseDays");
         if (document.getElementById(`decreaseDaysPump${i}`) != null) document.getElementById(`decreaseDaysPump${i}`).setAttribute("class", "activeDecreaseDays");
     }
-    unlockButtons();
+    unlockButtons(count);
 }

@@ -44,8 +44,11 @@ function setNewInterval(number, interval) {
     });
 }
 
-async function getData() {
-    const response = await fetch('/api/getData');
-    const data = await response.json();
-    return data;
+function getData() {
+    return fetch('/api/getData', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json());
 }

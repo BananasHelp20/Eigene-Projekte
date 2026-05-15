@@ -15,8 +15,8 @@ function init() {
     setColorTheme();
     getPumpCount().then((pumpCount) => {
         initializePumps(pumpCount);
+        initializeFeature(pumpCount);
     });
-    initializeFeature();
     let pumpObjects;
     getData().then((data) => {
         pumpObjects = data;
@@ -27,6 +27,7 @@ function init() {
         }
         displayStats();
     });
+    firstEditModeCheck();
 }
 
 init();

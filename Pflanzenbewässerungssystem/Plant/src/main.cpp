@@ -84,6 +84,7 @@ void webRouts() {
             pumpObject["interval"] = dayGoal[i];
             pumpObject["duration"] = durationInMillSec[i];
             pumpObject["lastPumpingTimestamp"] = (long unsigned int)timeStamp[i];
+            pumpObject["timesPumped"] = 0;
         }
         
         String response;

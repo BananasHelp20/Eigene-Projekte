@@ -1,5 +1,5 @@
-let active;
-let editMode;
+let active = true;
+let editMode = false;
 
 let revertBtn = document.getElementById("revert");
 let editBtn = document.getElementById("edit");
@@ -18,9 +18,7 @@ let decreaseSecText = "um 0.1 Sekunden verringern";
 let increaseDaysText = "um 1 Tag erhöhen";
 let decreaseDaysText = "um 1 Tag verringern";
 
-let count = 3;
-
-function createPumps(count) {
+function createPumpInDecrease(count) {
     let container = document.getElementById("pumpDiv");
     container.innerHTML = "";
 
@@ -92,7 +90,31 @@ function createPumps(count) {
     }
 }
 
-function initializeFeature() {
+function createPumpActions(count) {
+    let container = document.getElementById("useDiv");
+    container.innerHTML = "";
+
+    for (let i = 0; i < count; i++) {
+        let buttons = [document.createElement("button"), document.createElement("button")];
+
+        buttons[0].id = `pump${i + 1}`;
+        buttons[0].classList.add("useIt");
+        buttons[0].innerText = `Pumpe ${i + 1} betätigen`;
+        buttons[1].id = `pump${i + 1}NoCTR`;
+        buttons[1].classList.add("useItWisely");
+        buttons[1].innerText = `Zeitinterval nicht zurücksetzen`;
+
+        let wrapper = document.createElement("div");
+        
+        wrapper.appendChild(buttons[0]);
+        wrapper.appendChild(buttons[1]);
+        wrapper.appendChild(document.createElement("br"));
+
+        container.appendChild(wrapper);
+    }
+}
+
+function initializeFeature(count) {
     //darkmode/lightmode
     document.getElementById("lightSwitch").addEventListener("click", () => {
         darkmodeButton();
@@ -101,7 +123,7 @@ function initializeFeature() {
     //edit button
     if (editBtn != null)
         editBtn.addEventListener("click", () => {
-            activateOrDeactivateEditMode();
+            activateOrDeactivateEditMode(count);
         });
 
     //revert button
@@ -112,20 +134,23 @@ function initializeFeature() {
 }
 
 function initializePumps(count) {
-    for (let i = 1; i <= count; i++) {
-        document.getElementById(`pump${i}`)?.addEventListener("click", () => {
-            sendPumpSignal(i, durations[i - 1]);
-        });
+    if (document.getElementById("useDiv")) {
+        createPumpActions(count);
+        for (let i = 1; i <= count; i++) {
+            document.getElementById(`pump${i}`).addEventListener("click", () => {
+                if (!editMode && active) sendPumpSignal(i, parseInt(localStorage.getItem(`delay${i}`)) || 1000);
+            });
 
-        document.getElementById(`pumpNoCtr${i}`)?.addEventListener("click", () => {
-            sendPumpSignalWithoutCounterChange(i, durations[i - 1]);
-        });
+            document.getElementById(`pump${i}NoCTR`).addEventListener("click", () => {
+                if (!editMode && active) sendPumpSignalWithoutCounterChange(i, parseInt(localStorage.getItem(`delay${i}`)) || 1000);
+            });
+        }
     }
 
     let container = document.getElementById("pumpDiv");
     if (!container) return;
 
-    createPumps(count);
+    createPumpInDecrease(count);
     for (let i = 1; i <= count; i++) {
         timesPumped[i - 1] = parseInt(localStorage.getItem(`timesPumped${i}`)) || 0;
         delays[i - 1] = parseInt(localStorage.getItem(`delay${i}`)) || 0;

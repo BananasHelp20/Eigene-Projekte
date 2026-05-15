@@ -41,14 +41,16 @@ function setColorTheme() {
     }
 }
 
-function activateOrDeactivateEditMode() {
-    if (localStorage.getItem("editMode") == "on") {
+function activateOrDeactivateEditMode(count) {
+    if (localStorage.getItem("editMode") == "on" || editMode) {
         localStorage.setItem("editMode", "off");
+        editMode = false;
     } else {
         localStorage.setItem("editMode", "on");
+        editMode = true;
         saveSettingsBeforeEditing();
     }
-    editSettingsModeCheck();
+    editSettingsModeCheck(count);
 }
 
 function sleep(milliseconds) {
@@ -60,21 +62,40 @@ function sleep(milliseconds) {
     }
 }
 
-function editSettingsModeCheck() {
-    if (localStorage.getItem("editMode") == "on") {
+function firstEditModeCheck() {
+    if (localStorage.getItem("editMode") == "on" || editMode) {
         activateButtons();
         if (editBtn != null) editBtn.setAttribute("class", "activeSiteButton");
         editMode = true; //Wenn !editmode und active darf er Pumpen, sonst nicht
         if (editBtn != null) editBtn.innerHTML = "Save Settings";
     } else {
         deactivateButtons();
-        // for (let i = 1; i <= count; i++) {
-        //     sendPumpSettings(i, localStorage.getItem("timeToWait" + i), localStorage.getItem("delay" + i));
-        // }
         if (editBtn != null) editBtn.setAttribute("class", "siteButton");
         editMode = false;
         if (editBtn != null) editBtn.innerHTML = "Enter Edit Mode";
     }
+}
+
+function editSettingsModeCheck(count) {
+    if (localStorage.getItem("editMode") == "on" || editMode) {
+        activateButtons();
+        if (editBtn != null) editBtn.setAttribute("class", "activeSiteButton");
+        editMode = true; //Wenn !editmode und active darf er Pumpen, sonst nicht
+        if (editBtn != null) editBtn.innerHTML = "Save Settings";
+    } else {
+        deactivateButtons();
+        for (let i = 1; i <= count; i++) {
+            sendPumpSettings(i, parseInt(localStorage.getItem("timeToWait" + i)), parseInt(localStorage.getItem("delay" + i)));
+        }
+        if (editBtn != null) editBtn.setAttribute("class", "siteButton");
+        editMode = false;
+        if (editBtn != null) editBtn.innerHTML = "Enter Edit Mode";
+    }
+}
+
+function sendPumpSettings(number, interval, duration) {
+    setNewDuration(number, duration);
+    setNewInterval(number, interval);
 }
 
 function activateOrDeactivateProcess() {

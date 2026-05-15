@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pflanzenbewässerungssystem/settings</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link id="layoutMode" rel="stylesheet" href="./CSS/modern/modernLayout.css">
+    <link id="mode" rel="stylesheet" href="./CSS/modern/modernDark.css">
+    <script src="./Script/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/551bc8aabe.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="top"></div>
+    <header>
+        <a href="./pumpManually.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-wrench menuOption"></i>
+                Manuell betätigen
+            </span>
+        </a>
+        <div class="activeMenuItem">
+            <span class="activeMenuOption">
+                <i class="fa-solid fa-gear menuOption"></i>
+                Einstellungen
+            </span>
+        </div>
+        <a href="./manageProcess.html" class="menuItem">
+            <span class="menuOption">
+                <i id="progressSite" class="fa-solid fa-toggle-on menuOption"><!--oder "fa-solid fa-toggle-off" --></i>
+                Ein- und ausschalten
+            </span>
+        </a>
+        <a href="./wateredPlants.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-seedling menuOption"></i>
+                Bewässerte Pflanzen
+            </span>
+        </a>
+        <a href="./statistics.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-chart-column menuOption"></i>
+                Statistiken
+            </span>
+        </a>
+        <a href="./index.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-backward menuOption"></i>
+                zurück zur Startseite
+            </span>
+        </a>
+    </header>
+    <div class="subHeader">
+        <!-- //Switch darkmode/lightmode and back to top -->
+    </div>
+    <div class="siteBody">
+        <div class="leftBody">
+            <button class="siteButton" id="edit">Activate Edit Mode</button>
+            <button class="siteButton" id="revert">Revert Editing</button>
+        </div>
+        <div class="middleBody">
+            <br>
+            <h1 class="headingText">Pumpeneinstellungen</h1>
+            <div id="pumpDiv">
+                <div class="pump">
+                    <h1 class="subHeadingText">Pumpe 1</h1>
+                    <div class="text">
+                        Intervall in Tagen: <p id="dayDisplay1"></p>
+                        <button class="activeIncreaseDays" id="increaseDaysPump1">um 1 Tag erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseDays" id="decreaseDaysPump1">um 1 Tag verringern</button>
+                        <br><br>
+                        Dauer in Millisekunden: <p id="delayDisplay1"></p>
+                        <button class="activeIncreaseSec" id="increaseSecPump1">um 0.1 Sekunden erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseSec" id="decreaseSecPump1">um 0.1 Sekunden verringern</button>
+                    </div>
+                </div>
+                <div class="pump">
+                    <h1 class="subHeadingText">Pumpe 2</h1>
+                    <div class="text">
+                        Intervall in Tagen: <p id="dayDisplay2"></p>
+                        <button class="activeIncreaseDays" id="increaseDaysPump2">um 1 Tag erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseDays" id="decreaseDaysPump2">um 1 Tag verringern</button>
+                        <br><br>
+                        Dauer in Millisekunden: <p id="delayDisplay2"></p>
+                        <button class="activeIncreaseSec" id="increaseSecPump2">um 0.1 Sekunden erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseSec" id="decreaseSecPump2">um 0.1 Sekunden verringern</button>
+                    </div>
+                </div>
+                <div class="pump">
+                    <h1 class="subHeadingText">Pumpe 3</h1>
+                    <div class="text">
+                        Intervall in Tagen: <p id="dayDisplay3"></p>
+                        <button class="activeIncreaseDays" id="increaseDaysPump3">um 1 Tag erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseDays" id="decreaseDaysPump3">um 1 Tag verringern</button>
+                        <br><br>
+                        Dauer in Millisekunden: <p id="delayDisplay3"></p>
+                        <button class="activeIncreaseSec" id="increaseSecPump3">um 0.1 Sekunden erhöhen</button>
+                        <br>
+                        <button class="activeDecreaseSec" id="decreaseSecPump3">um 0.1 Sekunden verringern</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rightBody">
+            <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
+            <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
+        </div>
+    </div>
+    <div class="background"></div>
+</body>
+</html>

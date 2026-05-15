@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pflanzenbewässerungssystem/pump_manually</title>
+    <title>Pflanzenbewässerungssystem/plants</title>
     <link rel="icon" href="./favicon.ico" type="image/x-icon">
     <link id="layoutMode" rel="stylesheet" href="./CSS/modern/modernLayout.css">
     <link id="mode" rel="stylesheet" href="./CSS/modern/modernDark.css">
@@ -14,12 +14,12 @@
 <body>
     <div id="top"></div>
     <header>
-        <div class="activeMenuItem">
-            <span class="activeMenuOption">
+        <a href="./pumpManually.html" class="menuItem">
+            <span class="menuOption">
                 <i class="fa-solid fa-wrench menuOption"></i>
                 Manuell betätigen
             </span>
-        </div>
+        </a>
         <a href="./settings.html" class="menuItem">
             <span class="menuOption">
                 <i class="fa-solid fa-gear menuOption"></i>
@@ -32,12 +32,12 @@
                 Ein- und ausschalten
             </span>
         </a>
-        <a href="./wateredPlants.html" class="menuItem">
-            <span class="menuOption">
+        <div class="activeMenuItem">
+            <span class="activeMenuOption">
                 <i class="fa-solid fa-seedling menuOption"></i>
                 Bewässerte Pflanzen
             </span>
-        </a>
+        </div>
         <a href="./statistics.html" class="menuItem">
             <span class="menuOption">
                 <i class="fa-solid fa-chart-column menuOption"></i>
@@ -52,21 +52,32 @@
         </a>
     </header>
     <div class="subHeader">
-        <!-- //Switch darkmode/lightmode and back to top -->
-        <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
-        <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
     </div>
     <div class="siteBody">
-        <h1 class="headingText"><br>Manuell betätigen</h1>
-        <p class="text">
-            Drücken sie auf einen dieser Buttons um die Pumpe manuell zu betätigen, ACHTUNG: wenn sie
-            die Pumpe betätigen wird der Counter zurückgesetzt außer sie nutzen den Button daneben, welcher
-            die Pumpe betätigt, ohne den Counter zurück zu setzen.
-        </p>
-        <div class="useDiv">
-            <div><button id="pump1" class="useIt">Pumpe 1 betätigen</button><button class="useItWisely" id="pump1NoCTR">Ctr nicht zurücksetzen</button><br></div>
-            <div><button id="pump2" class="useIt">Pumpe 2 betätigen</button><button class="useItWisely" id="pump2NoCTR">Ctr nicht zurücksetzen</button><br></div>
-            <div><button id="pump3" class="useIt">Pumpe 3 betätigen</button><button class="useItWisely" id="pump3NoCTR">Ctr nicht zurücksetzen</button><br></div>
+        <div class="leftBody">
+            <br>&emsp;<br>
+        </div>
+        <div class="middleBody">
+            <br><br>
+            <h1 class="headingText"><br>Bewässerte Pflanzen</h1>
+            <p class="text">
+                Hier sehen sie alle Pflanzen die momentan aktiv vom Pflanzenbewässerungssystem verwaltet, bzw bewässert werden.
+                Natürlich in Kategorieen angeführt und mit bildern:
+            </p>
+            <h4 class="subHeadingText">Kakteen</h4>
+            <p class="text"></p>
+            <h4 class="subHeadingText">Pitahayas</h4>
+            <p class="text"></p>
+            <h4 class="subHeadingText">Sukkulenten</h4>
+            <p class="text"></p>
+            <h4 class="subHeadingText">Bäume</h4>
+            <p class="text"></p>
+            <h4 class="subHeadingText">andere Pflanzen</h4>
+            <p class="text"></p>
+        </div>
+        <div class="rightBody">
+            <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
+            <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
         </div>
     </div>
     <div class="background"></div>

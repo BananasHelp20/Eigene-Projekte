@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pflanzenbewässerungssystem/ducumentation</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link id="layoutMode" rel="stylesheet" href="./CSS/modern/modernLayout.css">
+    <link id="mode" rel="stylesheet" href="./CSS/modern/modernDark.css">
+    <script src="./Script/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/551bc8aabe.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="top"></div>
+    <header>
+        <a href="./codeFragments.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-code menuOption"></i>
+                Code Fragmente
+            </span>
+        </a>
+        <a href="./parts.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-list-check menuOption"></i>
+                Teileliste
+            </span>
+        </a>
+        <div class="activeMenuItem">
+            <span class="activeMenuOption">
+                <i class="fa-regular fa-file-code menuOption"></i>
+                Code Dokumentation
+            </span>
+        </div>
+        <a href="./instruction.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-wrench menuOption"></i>
+                Bauanleitung
+            </span>
+        </a>
+        <a href="./index.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-backward menuOption"></i>
+                zurück zur Startseite
+            </span>
+        </a>
+    </header>
+    <div class="subHeader">
+        <!-- //Switch darkmode/lightmode and back to top -->
+    </div>
+    <div class="siteBody">
+        <div class="leftBody">
+            <br>&emsp;<br>
+        </div>
+        <div class="middleBody">
+            <br><br>
+            <h1>Code Documentation</h1>
+            <h3>Es wird empfohlen, sich zuerst die Bauanleitung durchzulesen</h3>
+            <br>
+            <p>
+                <disclaimer>
+                    DISCLAIMER: Die ganzen Zeilen sind bei mir farblich, weil ich sie in einem Speziellen Programm für Coding aufgemacht
+                    habe, es reicht jedoch, wenn die Files mit einem gewöhnlichen Texteditor wie Notepad++ aufgemacht werden. Zum auf den
+                    ESP32 Überspielen ist jedoch eine IDE (Fancy Texteditor) notwendig, wie z.B. VS code mit PlatformIO extension, oder Arduino IDE
+                </disclaimer>
+                <br><br>
+                <step>Schritt 3: Code</step>
+                <br><br>
+                dem ESP32 den Zugang ins Lokale Internet zu gewähren, bitte Schreiben sie beides wie im Beispiel
+                unter Anführungszeichen, um einen String zu symbolisieren:
+                <img src="" alt="">
+                <br><br>
+                Kommen wir nun zum Code, um die neu gebaute Pumpe einzurichten:
+                standardmäßig sind 3 Pumpen vordefiniert, aber man kann ruhig welche entfernen, oder hinzufügen.
+                Mein Plan wäre es gewesen, nur 1 Button auf der Website drücken zu müssen, um das Ganze dann
+                umzuschreiben, und automatisch eine neue Pumpe hinzuzufügen. Das ist an sich auch kein Problem,
+                es liese sich relativ einfach einrichten, per button eine neue Pumpe zu definieren. Das einzige
+                Problem dabei ist, das die Website den Code dann auf dem ESP 32 umschreibt, und nicht auf dem PC.
+                Was bedeutet, dass jedes mal wenn änderungen vorgenommen werden, oder dem ESP32 der Strom
+                ausgeht, alles wieder weg ist, was man neu eingerichtet hat. Deshalb muss der Code am PC geändert
+                werden, und dann per VS code raufgeladen werden, um die Datei am PC gespeichert zu lassen.
+                <br><br>
+                Die Pumpen sind in diesem schema definiert: #define PUMP[zahl] [EP Nummer]
+                Oder ausgeschrieben: zuerst muss #define geschrieben werden, um etwas zu definieren, dann wird
+                z.B. PUMP4 geschrieben werden, das ist nur der Name, ist aber im code auf die Zahl angewiesen.
+                Dies ist sozusagen eine Zahl die mitzählt, beginnend mit 1. Und die letzte Zahl (im Beispiel 17, 16 und
+                15) ist die Entrypoint nummer, die du verwendet hast, als du das Jumperkabel auf den Entrypoint
+                gesteckt hast
+                <img src="" alt="">
+                <br><br>
+                Dann wird die Pumpe noch verwendbar gemacht, hierfür muss hier etwas geändert werden:
+                <img src="" alt="">
+                <br><br>
+                Es wird simple abgefragt, welche Nummer die Pumpe hat. Diese steht dann im Namen der Pumpe.
+                Bei der Abprüfung (pumpNum == 3) würde dann z.B. (pumpNum == 4) oder so stehen. An der Stelle
+                wo im Beispiel „PUMP3“ steht, wird der Name mit der Nummer angeführt.
+                <img src="" alt="">
+                <br><br>
+                Hier im Bild sieht man 3 verschiedene Arrays, in einem ist ein Standardwert von 10 gespeichert, in
+                einem anderen ein Wert von 1000, und in einem anderen ein Wert von timeClient.getEpochTime();.
+                Was einfach getan werden muss, ist dass bei jedem der Arrays, die 3 in den Eckigen Klammern auf 1
+                höher gesetzt werden muss, und dann ein Wert mehr hineingeschrieben werden muss.
+                BSP: 4 Pumpen:
+                <br><br>
+                <code>
+                    dayGoal[4] = {10, 10, 10, 10}; <br>
+                    intervallInMillSec[4] = {}; <br>
+                    timeStamp[4] = {timeClient.getEpochTime(), timeClient.getEpochTime(), timeClient.getEpochTime(),
+                    timeClient.getEpochTime()};
+                </code>
+                <br><br>
+                In einer zukünftigen Version, werde ich vielleicht eine Nutzerfreundlichere Methode einbauen, um
+                den Ganzen code umzuschreiben, dass man das nich mehr manuell machen muss. Vielleicht in
+                version 1.1 oder gar erst in 2.0. Die Version 1.0 wird noch manuell sein, das kann ich schonmal
+                sagen.
+                <br><br>
+                Als nächstes werden sachen für die Website gemacht, beginnen wir mit dem Befehl fürs manuelle nutzen: Rechts sieht man
+                den Befehl für 3 Pumpen, um z.B. eine 4. Hinzuzufügen, muss man einfach dass selbe nocheinmal machen, und zu jeder
+                vorkommenden Zahl, außer „request->send(200);“ 1 hinzufügen, unter Plant/IMPORTANT findet sich eine datei, in der der
+                Beispielcode für eine 4. Bereits gemacht wurde, sie können diesen einfach copy-pasten, dieser ist auch sicher aktueller,
+                als der Code, der im Bild zu sehen ist, das ist zur Zeit des Schreibens dieser Dokumentation noch eine große Baustelle.
+                <img src="" alt="">
+                <br><br>
+                Das Selbe gilt auch für alle anderen Codesegmente, die sich im Dokument „Built in code“ befinden, bzw auf der Seite
+                „<a href="./codeFragments.html"><u>Code Fragmente</u></a>“
+                <br><br>
+                <step>Schritt 4: Website</step>
+                <br><br>
+                {Dieser Teil ist noch sehr Variabel, und daher werde ich ihn noch nicht beschreiben, das kann noch dauern}
+            </p>
+        </div>
+        <div class="rightBody">
+            <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
+            <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
+        </div>
+    </div>
+    <div class="background"></div>
+</body>
+</html>

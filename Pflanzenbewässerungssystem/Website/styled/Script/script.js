@@ -1,52 +1,18 @@
-let delay1 = localStorage.getItem("delay1");
-let delay2 = localStorage.getItem("delay2");
-let delay3 = localStorage.getItem("delay3");
-let timeToWait1 = localStorage.getItem("timeToWait1");
-let timeToWait2 = localStorage.getItem("timeToWait2");
-let timeToWait3 = localStorage.getItem("timeToWait3");
 let active;
 let editMode;
-let timesPumped = [localStorage.getItem("timesPumped1"), localStorage.getItem("timesPumped2"), localStorage.getItem("timesPumped3")];
 
-let dayDisplay1 = document.getElementById("dayDisplay1");
-let dayDisplay2 = document.getElementById("dayDisplay2");
-let dayDisplay3 = document.getElementById("dayDisplay3");
-let delayDisplay1 = document.getElementById("delayDisplay1");
-let delayDisplay2 = document.getElementById("delayDisplay2");
-let delayDisplay3 = document.getElementById("delayDisplay3");
+let timesPumped = [
+    parseInt(localStorage.getItem("timesPumped1")) || 0,
+    parseInt(localStorage.getItem("timesPumped2")) || 0,
+    parseInt(localStorage.getItem("timesPumped3")) || 0
+];
 
 let revertBtn = document.getElementById('revert');
 let editBtn = document.getElementById("edit");
 let processSite = document.getElementById("progressSite");
 
-let pumpBtn1 = document.getElementById("pump1");
-let pumpBtn2 = document.getElementById("pump2");
-let pumpBtn3 = document.getElementById("pump3");
-
-let pumpNoCtrBtn1 = document.getElementById("pump1NoCTR");
-let pumpNoCtrBtn2 = document.getElementById("pump2NoCTR");
-let pumpNoCtrBtn3 = document.getElementById("pump3NoCTR");
-
-let increaseDelayBtn1 = document.getElementById("increaseSecPump1");
-let increaseDelayBtn2 = document.getElementById("increaseSecPump2");
-let increaseDelayBtn3 = document.getElementById("increaseSecPump3");
-
-let decreaseDelayBtn1 = document.getElementById("decreaseSecPump1");
-let decreaseDelayBtn2 = document.getElementById("decreaseSecPump2");
-let decreaseDelayBtn3 = document.getElementById("decreaseSecPump3");
-
-let increaseTimeBtn1 = document.getElementById("increaseDaysPump1");
-let increaseTimeBtn2 = document.getElementById("increaseDaysPump2");
-let increaseTimeBtn3 = document.getElementById("increaseDaysPump3");
-
-let decreaseTimeBtn1 = document.getElementById("decreaseDaysPump1");
-let decreaseTimeBtn2 = document.getElementById("decreaseDaysPump2");
-let decreaseTimeBtn3 = document.getElementById("decreaseDaysPump3");
-
 let processBtn = document.getElementById("progress");
 let smallProcessBtn = document.getElementById("smallProcessBtn");
-
-/* JO I BIN SCHO DRAUF KEMA DAS ES ARRAYS GIBT, OBA MI HODS BIS JETZT ECHT NED GFREIT, DES OLLES UMZUSCHREIBEN */
 
 //litteral text
 let increaseDelayText = "increase by 0.1 seconds";
@@ -60,19 +26,101 @@ function init() {
     document.getElementById("lightSwitch").addEventListener("click", () => {darkmodeButton();});
     setColorTheme();
 
-    //process starten/stoppen
-    fetchProcess();
-
     //edit mode an und aus
     editSettingsModeCheck();
     if (editBtn != null) editBtn.addEventListener("click", () => { activateOrDeactivateEditMode();});
     if (revertBtn != null) revertBtn.addEventListener("click", () => {if (editMode) revertSettings();});
     
     //zeit zeigs
-    fetchSec();
-    fetchDays();
     displayStats();
-    checkTime();
+}
+
+function init() {
+    getPumpCount().then((count) => {
+        //createPumps(count);
+        initializePumps(count);
+    });
+    let pumpObjects;
+    getData().then((data) => {
+        pumpObjects = data;
+        for (let i = 0; i < pumpObjects.length; i++) {
+            durations.push(pumpObjects[i].duration);
+        }
+
+    });
+
+    document.getElementById("edit")?.addEventListener("click", (event) => {
+        editmode = !editmode;
+        event.target.innerText = editmode ? "Save Settings" : "Edit Settings";
+    });
+}
+
+function initializePumps(count) {
+    for (let i = 1; i <= count; i++) {
+        document.getElementById(`pump${i}`)?.addEventListener("click", () => {
+            sendPumpSignal(i, durations[i - 1]);
+        });
+
+        document.getElementById(`pumpNoCtr${i}`)?.addEventListener("click", () => {
+            sendPumpSignalWithoutCounterChange(i, durations[i - 1]);
+        });
+
+        document.getElementById(`increaseSeconds${i}`)?.addEventListener("click", () => {
+            if (getEditMode()) changeDuration(i, 1000);
+        });
+
+        document.getElementById(`decreaseSeconds${i}`)?.addEventListener("click", () => {
+            if (getEditMode()) changeDuration(i, -1000);
+        });
+
+        document.getElementById(`increaseDays${i}`)?.addEventListener("click", () => {
+            if (getEditMode()) changeInterval(i, 1);
+        });
+
+        document.getElementById(`decreaseDays${i}`)?.addEventListener("click", () => {
+            if (getEditMode()) changeInterval(i, -1);
+        });
+    }
+}
+
+function changeDuration(pumpNumber, durationChange) {
+    durations[pumpNumber - 1] += durationChange;
+    setNewDuration(pumpNumber, durations[pumpNumber - 1]);
+}
+
+function changeInterval(pumpNumber, intervalChange) {
+    setNewInterval(pumpNumber, intervalChange);
+}
+
+function getEditMode() {
+    return editmode;
+}
+
+function displayStats() {
+    let latestPumpingDisplays = document.getElementById(`latestPumping`);
+
+    let timesPumpedDisplay1 = document.getElementById("displayAmountPumped1");
+    let timesPumpedDisplay2 = document.getElementById("displayAmountPumped2");
+    let timesPumpedDisplay3 = document.getElementById("displayAmountPumped3");
+
+    if (delayDisplay1 != null) delayDisplay1.innerHTML = delay1;
+    localStorage.setItem("delay1", delay1 + "");
+    if (dayDisplay1 != null) dayDisplay1.innerHTML = timeToWait1;
+    localStorage.setItem("timeToWait1", timeToWait1 + "");
+
+    if (delayDisplay2 != null) delayDisplay2.innerHTML = delay2;
+    localStorage.setItem("delay2", delay2 + "");
+    if (dayDisplay2 != null) dayDisplay2.innerHTML = timeToWait2;
+    localStorage.setItem("timeToWait2", timeToWait2 + "");
+
+    if (delayDisplay3 != null) delayDisplay3.innerHTML = delay3;
+    localStorage.setItem("delay3", delay3 + "");
+    if (dayDisplay3 != null) dayDisplay3.innerHTML = timeToWait3;
+    localStorage.setItem("timeToWait3", timeToWait3 + "");
+
+    if (timesPumpedDisplay1 != null) timesPumpedDisplay1.innerHTML = timesPumped[0];
+    if (timesPumpedDisplay2 != null) timesPumpedDisplay2.innerHTML = timesPumped[1];
+    if (timesPumpedDisplay3 != null) timesPumpedDisplay3.innerHTML = timesPumped[2];
 }
 
 function darkmodeButton() {
@@ -131,24 +179,13 @@ function editSettingsModeCheck() {
         if (editBtn != null) editBtn.innerHTML = "Save Settings";
     } else {
         deactivateButtons();
+        for (let i = 1; i <= pumps; i++) {
+            sendPumpSettings(i, localStorage.getItem("timeToWait" + i), localStorage.getItem("delay" + i));
+        }
         if (editBtn != null) editBtn.setAttribute("class", "siteButton");
         editMode = false;
         if (editBtn != null) editBtn.innerHTML = "Enter Edit Mode";
     }
-}
-
-function fetchProcess() {
-    if (localStorage.getItem("currentProgress") == "true") {
-        active = true;
-        if (processBtn != null) processBtn.innerHTML = "ACTIVE";
-        if (processSite != null) processSite.setAttribute("class", "fa-solid fa-toggle-on menuOption");
-    } else {
-        if (processBtn != null) processBtn.innerHTML = "INACTIVE";
-        if (processSite != null) processSite.setAttribute("class", "fa-solid fa-toggle-off menuOption");
-        active = false;
-    }
-    if (processSite != null) processSite.addEventListener("click", () => { activateOrDeactivateProcess(); });
-    if (processBtn != null) processBtn.addEventListener("click", () => { activateOrDeactivateProcess(); });
 }
 
 function activateOrDeactivateProcess() {
@@ -162,101 +199,6 @@ function activateOrDeactivateProcess() {
         processSite.setAttribute("class", "fa-solid fa-toggle-off menuOption");
         localStorage.setItem("currentProgress", "false");
     }
-}
-
-function pump(number) {
-    // fetch('/usePump' + number);
-    sleep(localStorage.getItem("delay" + number));
-    // fetch('/stopPump' + number);
-    localStorage.setItem("timestamp" + number, new Date().getTime());
-    timesPumped[number-1]++;
-    localStorage.setItem("timesPumped" + number, timesPumped[number-1]);
-    console.log("PUMPED!!!");
-}
-
-function pumpWithoutCounterReset(number) {
-    // fetch('/usePump' + number);
-    sleep(localStorage.getItem("delay" + number));
-    // fetch('/stopPump' + number);
-    console.log("PUMPED!!!");
-}
-
-function checkTime() {
-    if (timesPumped[0] == null) {
-        timesPumped[0] = 0;
-    }
-
-    if (timesPumped[1] == null) {
-        timesPumped[1] = 0;
-    }
-
-    if (timesPumped[2] == null) {
-        timesPumped[2] = 0;
-    }
-
-    if (localStorage.getItem("timestamp1") == null) {
-        localStorage.setItem("timestamp1", 0);
-    }
-
-    if (localStorage.getItem("timestamp2") == null) {
-        localStorage.setItem("timestamp2", 0);
-    }
-
-    if (localStorage.getItem("timestamp3") == null) {
-        localStorage.setItem("timestamp3", 0);
-    }
-
-    if (new Date().getTime() - localStorage.getItem("timestamp1") >= localStorage.getItem("timeToWait1") * 10000 && active && !editMode) {
-        pump(1);
-    }
-
-    if (new Date().getTime() - localStorage.getItem("timestamp2") >= localStorage.getItem("timeToWait2") * 10000 && active && !editMode) {
-        pump(2);
-    }
-
-    if (new Date().getTime() - localStorage.getItem("timestamp3") >= localStorage.getItem("timeToWait3") * 10000 && active && !editMode) {
-        pump(3);
-    }
-}
-
-function fetchSec() {
-    if (delay1 == null) {
-        delay1 = 0;
-    }
-    if (delay2 == null) {
-        delay2 = 0;
-    }
-    if (delay3 == null) {
-        delay3 = 0;
-    }
-
-    if (increaseDelayBtn1 != null) increaseDelayBtn1.addEventListener("click", () => { if (editMode) { delay1 /= 100; delay1++; delay1 *= 100 }; displayStats(); });
-    if (decreaseDelayBtn1 != null) decreaseDelayBtn1.addEventListener("click", () => { if (editMode) { delay1 /= 100; delay1--; delay1 *= 100 }; displayStats(); });
-    if (increaseDelayBtn2 != null) increaseDelayBtn2.addEventListener("click", () => { if (editMode) { delay2 /= 100; delay2++; delay2 *= 100 }; displayStats(); });
-    if (decreaseDelayBtn2 != null) decreaseDelayBtn2.addEventListener("click", () => { if (editMode) { delay2 /= 100; delay2--; delay2 *= 100 }; displayStats(); });
-    if (increaseDelayBtn3 != null) increaseDelayBtn3.addEventListener("click", () => { if (editMode) { delay3 /= 100; delay3++; delay3 *= 100 }; displayStats(); });
-    if (decreaseDelayBtn3 != null) decreaseDelayBtn3.addEventListener("click", () => { if (editMode) { delay3 /= 100; delay3--; delay3 *= 100 }; displayStats(); });
-}
-
-function fetchDays() {
-    if (timeToWait1 == null) {
-        timeToWait1 = 0;
-    }
-
-    if (timeToWait2 == null) {
-        timeToWait2 = 0;
-    }
-
-    if (timeToWait3 == null) {
-        timeToWait3 = 0;
-    }
-
-    if (increaseTimeBtn1 != null) increaseTimeBtn1.addEventListener("click", () => { if (editMode) { timeToWait1++ }; displayStats(); });
-    if (decreaseTimeBtn1 != null) decreaseTimeBtn1.addEventListener("click", () => { if (editMode) { timeToWait1-- }; displayStats(); });
-    if (increaseTimeBtn2 != null) increaseTimeBtn2.addEventListener("click", () => { if (editMode) { timeToWait2++ }; displayStats(); });
-    if (decreaseTimeBtn2 != null) decreaseTimeBtn2.addEventListener("click", () => { if (editMode) { timeToWait2-- }; displayStats(); });
-    if (increaseTimeBtn3 != null) increaseTimeBtn3.addEventListener("click", () => { if (editMode) { timeToWait3++ }; displayStats(); });
-    if (decreaseTimeBtn3 != null) decreaseTimeBtn3.addEventListener("click", () => { if (editMode) { timeToWait3-- }; displayStats(); });
 }
 
 function deactivateButtons() {
@@ -355,48 +297,4 @@ function revertSettings() {
     //rendern
     displayStats();
 }
-
-function displayStats() {
-    let latestPumpingDisplay1 = document.getElementById("latestPumping1");
-    let latestPumpingDisplay2 = document.getElementById("latestPumping2");
-    let latestPumpingDisplay3 = document.getElementById("latestPumping3");
-
-    let timesPumpedDisplay1 = document.getElementById("displayAmountPumped1");
-    let timesPumpedDisplay2 = document.getElementById("displayAmountPumped2");
-    let timesPumpedDisplay3 = document.getElementById("displayAmountPumped3");
-
-    if (delayDisplay1 != null) delayDisplay1.innerHTML = delay1;
-    localStorage.setItem("delay1", delay1 + "");
-    if (dayDisplay1 != null) dayDisplay1.innerHTML = timeToWait1;
-    localStorage.setItem("timeToWait1", timeToWait1 + "");
-
-    if (delayDisplay2 != null) delayDisplay2.innerHTML = delay2;
-    localStorage.setItem("delay2", delay2 + "");
-    if (dayDisplay2 != null) dayDisplay2.innerHTML = timeToWait2;
-    localStorage.setItem("timeToWait2", timeToWait2 + "");
-
-    if (delayDisplay3 != null) delayDisplay3.innerHTML = delay3;
-    localStorage.setItem("delay3", delay3 + "");
-    if (dayDisplay3 != null) dayDisplay3.innerHTML = timeToWait3;
-    localStorage.setItem("timeToWait3", timeToWait3 + "");
-
-    if (timesPumpedDisplay1 != null) timesPumpedDisplay1.innerHTML = timesPumped[0]; 
-    if (timesPumpedDisplay2 != null) timesPumpedDisplay2.innerHTML = timesPumped[1];
-    if (timesPumpedDisplay3 != null) timesPumpedDisplay3.innerHTML = timesPumped[2];
-}
-
-// function getAndDisplayMyNumbers(url, displayId) {
-//     // AJAX Anfrage mit Fetch API
-//     fetch(url)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error('response wasn"t ok');
-//             }
-//             return response.text()
-//         })
-//         .then(data => {
-//             document.getElementById(displayId).innerHTML = data;
-//         })
-//         .catch(error => console.error('Error:', error));
-// }
 init();

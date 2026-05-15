@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pflanzenbewässerungssystem/statistics</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link id="layoutMode" rel="stylesheet" href="./CSS/modern/modernLayout.css">
+    <link id="mode" rel="stylesheet" href="./CSS/modern/modernDark.css">
+    <script src="./Script/script.js" defer></script>
+    <script src="https://kit.fontawesome.com/551bc8aabe.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="top"></div>
+    <header>
+        <a href="./pumpManually.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-wrench menuOption"></i>
+                Manuell betätigen
+            </span>
+        </a>
+        <a href="./settings.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-gear menuOption"></i>
+                Einstellungen
+            </span>
+        </a>
+        <a href="./manageProcess.html" class="menuItem">
+            <span class="menuOption">
+                <i id="progressSite" class="fa-solid fa-toggle-on menuOption"><!--oder "fa-solid fa-toggle-off" --></i>
+                Ein- und ausschalten
+            </span>
+        </a>
+        <a href="./wateredPlants.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-seedling menuOption"></i>
+                Bewässerte Pflanzen
+            </span>
+        </a>
+        <div class="activeMenuItem">
+            <span class="activeMenuOption">
+                <i class="fa-solid fa-chart-column menuOption"></i>
+                Statistiken
+            </span>
+        </div>
+        <a href="./index.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-backward menuOption"></i>
+                zurück zur Startseite
+            </span>
+        </a>
+    </header>
+    <div class="subHeader">
+    </div>
+    <div class="siteBody">
+        <div class="leftBody">
+            <br>&emsp;<br>
+        </div>
+        <div class="middleBody">
+            <br><br>
+            <h1 class="headingText"><br>Statistiken</h1><br>
+            
+            <p class="text">
+                Pumpintervall Pumpe 1: <span id="dayDisplay1"></span>
+            </p>
+            <p class="text">
+                Pumpintervall Pumpe 2: <span id="dayDisplay2"></span>
+            </p>
+            <p class="text">
+                Pumpintervall Pumpe 3: <span id="dayDisplay3"></span>
+            </p>
+            <br>
+            
+            <p class="text">
+                Pumplänge Pumpe 1: <span id="delayDisplay1"></span>
+            </p>
+            <p class="text">
+                Pumplänge Pumpe 2: <span id="delayDisplay2"></span>
+            </p>
+            <p class="text" >
+                Pumplänge Pumpe 3: <span id="delayDisplay3"></span>
+            </p>
+            <br>
+            
+            <p class="text">Pumpe 1 in Betrieb seit: </p>
+            <p class="text" id="displayWorkingTime1"></p>
+            <p class="text">Pumpe 2 in Betrieb seit:</p>
+            <p class="text" id="displayWorkingTime2"></p>
+            <p class="text">Pumpe 3 in Betrieb seit:</p>
+            <p class="text" id="displayWorkingTime3"></p><br>
+            
+            <p class="text">Letzes Gießen der Pumpe 1:</p>
+            <p class="text" id="latestPumping1"></p>
+            <p class="text">Letzes Gießen der Pumpe 2:</p>
+            <p class="text" id="latestPumping2"></p>
+            <p class="text">Letzes Gießen der Pumpe 3:</p>
+            <p class="text" id="latestPumping3"></p><br>
+            
+            <p class="text">
+                Pumpe 1 hat <span id="displayAmountPumped1"></span> mal gegossen
+            </p>
+            <p class="text">
+                Pumpe 2 hat <span id="displayAmountPumped2"></span> mal gegossen
+            </p>
+            <p class="text">
+                Pumpe 3 hat <span id="displayAmountPumped3"></span> mal gegossen
+            </p>
+            <br>
+            
+            <p class="text">Anzahl an bewässerten Pflanzen:
+            <p class="text" id="diplayPlantAmount"></p><br>
+            
+            <p class="text">
+                Erfinder des Projekts: <br>
+                William Riegler 
+                <br><br>
+                Mithelfende des Projekts: <br>
+                Diego Santigo Maddox Digglmann, <br>
+                Prof. Johannes Oppitz, <br>
+                Mario Ebenhofer 
+                <br><br>
+                Projektzeitraum: 13.11.2024 - 
+                <br><br>
+                Involvierte Programmiersprachen: HTML, CSS, JavaScript, C++ <br>
+                <br><br>
+                Code Zeilen: <br>
+                    &emsp;&emsp;Html: <br>
+                    &emsp;&emsp;CSS: <br>
+                    &emsp;&emsp;JavaScript: <br>
+                    &emsp;&emsp;C++: <br>
+                
+                Dokumente: <br>
+                Ordner: <br>
+                Bilder: <br>
+            </p>
+            <p class="text">
+                was wird wie gemacht? <br>
+                lorem ipsum dolor...
+            </p>
+        </div>
+        <div class="rightBody">
+            <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
+            <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
+        </div>
+    </div>
+    <div class="background"></div>
+</body>
+</html>

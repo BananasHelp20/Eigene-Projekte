@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pflanzenbewässerungssystem/manage_process</title>
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+    <link id="layoutMode" rel="stylesheet" href="./CSS/classic/classicLayout.css">
+    <link id="mode" rel="stylesheet" href="./CSS/classic/classicDark.css">
+    <script src="./Script/initialize.js" defer></script>
+    <script src="./Script/router.js" defer></script>
+    <script src="./Script/script.js" defer></script>
+    <script src="./Script/render.js"></script>
+    <script src="./Script/primary.js" defer></script>
+    <script src="https://kit.fontawesome.com/551bc8aabe.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="top"></div>
+    <header>
+        <a href="./pumpManually.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-wrench menuOption"></i>
+                Manuell betätigen
+            </span>
+        </a>
+        <a href="./settings.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-gear menuOption"></i>
+                Einstellungen
+            </span>
+        </a>
+        <div class="activeMenuItem">
+            <span class="activeMenuOption">
+                <i id="progressSite" class="fa-solid fa-toggle-on menuOption"><!--oder "fa-solid fa-toggle-off" --></i>
+                Ein- und ausschalten
+            </span>
+        </div>
+        <a href="./wateredPlants.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-seedling menuOption"></i>
+                Bewässerte Pflanzen
+            </span>
+        </a>
+        <a href="./statistics.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-chart-column menuOption"></i>
+                Statistiken
+            </span>
+        </a>
+        <a href="./index.html" class="menuItem">
+            <span class="menuOption">
+                <i class="fa-solid fa-backward menuOption"></i>
+                zurück zur Startseite
+            </span>
+        </a>
+    </header>
+    <div class="subHeader">
+    </div>
+    <div class="siteBody">
+        <div class="leftBody">
+            <br>&emsp;<br>
+        </div>
+        <div class="middleBody">
+            <br><br>
+            <h1 class="headingText"><br>Prozess</h1>
+            <p class="text">
+                Hier können sie den Prozess stoppen, der Counter wird zwar für die gewisse zeit ausgeschaltet, und aktuallisiert sich in der Ausgeschalteten Form nicht,
+                aber ab dem Moment wo der Prozess weitergeht wird alles, was in der Zeit geschehen ist, nachgeholt; sprich, wenn eine Pumpe in der Zeit pumpen hätte müssen,
+                während der Counter aus war, wird die Pumpe direkt zu pumpen beginnen wenn der ESP32 wieder Online geht.
+            </p>
+            <p>Momentan: <p id="currentlyDoingAnything"></p></p>
+            <div class="prozessDiv">
+                <button id="progress" class="siteButton">Prozess stoppen</button>
+            </div>
+        </div>
+        <div class="rightBody">
+            <a href="#top" id="backToTop"><i class="fa-solid fa-arrow-up"></i></a>
+            <button id="lightSwitch">Switch Mode <i class="fa-solid fa-lightbulb"></i></button>
+        </div>
+    </div>
+    <div class="background"></div>
+</body>
+</html>

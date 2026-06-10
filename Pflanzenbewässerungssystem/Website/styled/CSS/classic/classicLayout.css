@@ -1,0 +1,267 @@
+:root {
+    --index-above: 2;
+    --index-normal: 1;
+    --index-below: 0;
+}
+
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    z-index: var(--index-normal);
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.headingText {
+    font-size: 25px;
+    text-align: center;
+}
+
+.subHeadingText {
+    font-size: 23px;
+    text-align: center;
+}
+
+.background {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transform: scale(1.2);
+    /* MUCHO IMPORTANTE beim bluren --> sonst weiße vignette */
+}
+
+header {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    height: 50px;
+    z-index: 2;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    height: 50px;
+}
+
+.text, table {
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.menuItem, .activeMenuItem {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-self: center;
+    width: 15%;
+}
+
+.menuOption, .activeMenuOption, .activeMenuItem, .menuItem {
+    text-shadow: 30px;
+    text-wrap: noWrap;
+}
+
+.middleBody {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    z-index: 1;
+}
+
+.rightBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 40%;
+    z-index: 1;
+}
+
+.leftBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-end;
+    padding-right: 5%;
+    padding-left: 5%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    width: 40%;
+    z-index: 1;
+}
+
+.siteBody {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: 0;
+    margin-left: -5%;
+    width: 100%;
+    z-index: 1;
+}
+
+#progress {
+    height: 100px;
+    width: 80%;
+    margin-bottom: 50px;
+    font-size: larger;
+}
+
+#lightSwitch {
+    border-radius: 10px;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 150px;
+    height: 80px;
+    font-size: large;
+}
+
+#backToTop {
+    position: fixed;
+    text-align: center;
+    font-size: xxx-large;
+    top: 91%;
+    right: 4%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 80px;
+}
+
+#edit {
+    text-align: center;
+    font-size: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 150px;
+    height: 80px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+#revert {
+    text-align: center;
+    font-size: 16px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 150px;
+    height: 80px;
+    border-radius: 10px;
+}
+
+.startStop {
+    width: 50%;
+    height: 100px;
+    border-radius: 5px;
+    margin-bottom: 30px;
+    font-size: 20px;
+}
+
+.pump {
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.activeIncreaseDays, 
+.activeDecreaseDays, 
+.activeIncreaseSec, 
+.activeDecreaseSec, 
+.inactiveIncreaseDays,
+.inactiveDecreaseDays,
+.inactiveIncreaseSec,
+.inactiveDecreaseSec {
+    padding: 10px;
+    margin: 3px;
+    border-radius: 10px;
+    border: 2px solid;
+    width: 50%;
+    font-size: 17px;
+}
+
+button, a {
+    transition: 200ms;
+}
+
+button:hover, a:hover {
+    transition: 100ms;
+}
+
+button:active, a:active {
+    transition: 200ms;
+}
+
+d☺ {
+    color: aqua;
+}
+
+.useIt, .useItWisely {
+    border: 1px solid;
+    margin: 5px;
+    padding: 15px;
+    width: 50%;
+    font-size: 17px;
+}
+
+.useDiv {
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.useDiv div {
+    display: flex;
+    flex-wrap: nowrap;
+}

@@ -1,0 +1,342 @@
+#//ITEMS
+{simpleItem
+    itemName
+    modelingmethod
+    creativeTab
+    ?[E #//enchantments alias tags are optional
+        Enchantable:Sword #//soon without "Enchantable:"
+        Enchantable:Axe
+        Enchantable:Pickaxe
+    ?]
+}
+
+{specialItem
+    itemName
+    modelingmethod
+    creativeTab
+    ?[E
+        Enchantable:Sword
+        Enchantable:Axe
+        Enchantable:Pickaxe
+    ?]
+}
+
+{specialItem
+    itemName
+    modelingmethod
+    ?rarity
+    creativeTab
+    ?[E
+        Enchantable:Sword
+        Enchantable:Axe
+        Enchantable:Pickaxe
+    ?]
+}
+
+{simpleSword
+    swordName
+    sword, properties #//as in code
+    createMethod
+    modelingmethod
+    material
+    creativeTab
+    ?[E
+        Enchantable:Axe
+    ?]
+}
+
+{specialSword
+    swordName
+    sword, properties
+    createMethod
+    modelingmethod
+    material
+    creativeTab
+    [ #//Specify brackets for createMethod
+        e.g. rarity
+    ]
+    !NO_ENCHANTS #//no enchantments (or tags)
+}
+
+{specialSword
+    swordName
+    sword, properties
+    createMethod
+    modelingmethod
+    material
+    ?rarity #//currently strange sematic #gottafixthat
+    creativeTab
+    [ #//Specify brackets
+        e.g. rarity
+    ]
+    ?[E
+        Enchantable:Axe
+        Enchantable:Pickaxe
+    ?]
+}
+
+{upgradableSword
+    baseSwordName
+    WeaponClass
+    createMethod
+    modelingmethod
+    material
+    [
+        variations #//(e.g. !ALL, or just a list from used variations)
+        !ALL #//! declares a command, and ALL means all variations
+    ]        #//instead of !ALL, there could be the following:
+    #//[
+    #//   none,
+    #//   amber_gemstone,
+    #//   ruby_gemstone
+    #//]
+    creativeTab
+    !NO_ENCHANTS
+}
+
+#//sets {
+    #//!CREATE_TOOLSET |steel|STEEL_SWORD_DAMAGE, STEEL_SWORD_SPEED|
+#//}
+
+#//RECIPES
+{smelting
+    category
+    outputItem
+    smelting, properties #// as in code
+    [
+        possibleInputItems
+    ]
+}
+
+{blasting
+    category
+    outputItem
+    blasting, properties #// as in code
+    [
+        possibleInputItems
+    ]
+}
+
+{both
+    category
+    outputItem
+    smelting, properties #// as in code
+    blasting, properties #// as in code
+    [
+        possibleInputItems
+    ]
+}
+
+{shaped
+    category
+    patternRow1
+    patternRow2 #// with X meaning nothing
+    patternRow3
+    meaning1 -> meaningItem1
+    meaning2 -> meaningItem2
+    meaningN -> meaningItemN
+    unlockedByItem
+    resultItem
+}
+
+{shapeless
+    category
+    unlockedByItem
+    resultItem
+    amount
+    [
+        neededItems
+    ]
+}
+
+{custom
+    CraftingBlockEntityClass
+    [
+        possibleInputItems
+    ]
+    [
+        possibleOutputItems
+    ]
+}
+
+{conversion
+    category
+    item <-> block #// auch -> und <- sind möglich für einseitige conversion
+}
+
+#//TOOL TIERS
+{normal
+    ingredientItem
+    materialName
+    materialProperties #//as in code
+}
+
+#//BLOCKS
+{simple
+    blockName
+    blockProperties #//as in code
+    dropMethod
+    ?dropOtherItemItem #//only if dropMethod equals dropOther
+    modelingmethod
+    breakTool
+    material
+    creativeTab
+}
+{special
+    blockName
+    createMethod
+    blockProperties
+    dropMethod
+    ?dropOtherItemItem #//only if dropMethod equals dropOther
+    blockWithItem
+    breakTool
+    material
+    creativeTab
+}
+{complex
+    blockName
+    new BlockClass(blockProperties)
+    dropMethod
+    ?dropOtherItemItem #//only if dropMethod equals dropOther
+    !NO_MODEL
+    breakTool
+    material
+    creativeTab
+}
+
+#//ores
+{simpleore
+    @simple {
+        blockName
+        blockProperties #//as in code
+        dropMethod
+        ?dropOtherItemItem #//only if dropMethod equals dropOther
+        modelingmethod
+        breakTool
+        material
+        creativeTab
+    }
+
+    @special {
+        blockName
+        createMethod
+        blockProperties
+        dropMethod
+        ?dropOtherItemItem #//only if dropMethod equals dropOther
+        blockWithItem
+        breakTool
+        material
+        creativeTab
+    }
+
+    @complex {
+        blockName
+        new BlockClass(blockProperties)
+        dropMethod
+        ?dropOtherItemItem #//only if dropMethod equals dropOther
+        !NO_MODEL
+        breakTool
+        material
+        creativeTab
+    }
+
+    defaultName
+    [
+        blockNames listed e.g.
+        jade_ore
+        jade_nether_ore
+        jade_end_ore
+    ]
+    [
+        dimensions listed e.g.
+        end
+    ]
+    [
+        generationSteps listed (ordered in blocknames) e.g.
+        Decoration.UNDERGROUND_ORES
+        Decoration.UNDERGROUND_ORES
+        Decoration.UNDERGROUND_ORES
+    ]
+    [
+        generational ruletests listed e.g.
+        [
+            properties of ruletest listed e.g.
+            endReplaceables
+            BlockMatchTest
+            Blocks.END_STONE
+        ]
+    ]
+    [
+        oreSizesForEachDimension listed e.g.
+        9
+        7
+        5
+    ]
+    [
+        placements for each dimension listed e.g.
+        [
+            placement properties listed e.g.
+            triangle
+            VerticalAnchor
+            absolute
+            -64
+            VerticalAnchor
+            absolute
+            80
+        ]
+    ]
+}
+
+{specialOre
+    @simple {
+        #//same as simpleOre
+    }
+
+    @special {
+        #//same as simpleOre
+    }
+
+    @complex {
+        #//same as simpleOre
+    }
+
+    defaultName
+        [
+            blockNames listed like normal
+        ]
+        [
+            dimensions listed and blocks per dimension e.g.
+            overworld
+            [
+                blocknames per dimensions listed e.g.
+                jade_ore
+                jade_deepslate_ore
+            ]
+        ]
+        [
+            generationSteps listed (ordered in blocknames) like normal
+        ]
+        [
+            generational ruletests listed like normal
+            [
+                properties of ruletest listed like normal
+            ]
+        ]
+        [
+            oreSizesForEachDimension listed like normal
+        ]
+        [
+            placements for each dimension listed like normal
+            [
+                placement properties listed like normal
+            ]
+        ]
+}
+
+
+#//CREATIVETABS
+{simpleTab
+    creative_tab_name
+    creativeTabName
+    displayItem
+}

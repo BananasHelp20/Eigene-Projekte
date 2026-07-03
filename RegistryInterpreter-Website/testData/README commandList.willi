@@ -1,0 +1,60 @@
+:::::::::::::::::::::
+.willi Manual
+:::::::::::::::::::::
+
+*********************
+General
+*********************
+#// declares a comment:
+    #//comment//#
+    #//comment
+    comment//# #//this does work even tho colors say otherwise
+
+! declares a command:
+    !COMMAND
+commands are used to shorten inputs or make certain inputs possible
+
+*********************
+Item Commands
+*********************
+!ALL --> makes all variations including the item without any upgrade #has to be declared instead of the item variation List
+!NO_MODEL --> model isn't created, to make room for custom models #has to be declared instead of the item model method
+!ULTRA --> makes item extremely strong #has to be decalred instead of the item properties (only for special and simple swords)
+#// !CREATE_TOOLSET |[material]|[properties]| --> makes all tools and the ingot for specific material
+!NO_ENCHANTS -->  makes clear that item is not enchantable
+!NO_TAB --> item does not appear in any creative tab
+
+*********************
+Block Commands
+*********************
+!NO_MODEL --> model isn't created, to make room for custom models #has to be declared instead of the block model method
+!INDESTRUCTIBLE --> makes block basically indestructible #has to be declared instead of the block properties
+!NO_TAB --> block does not appear in any creative tab
+!NO_TOOL --> block can be mined by hand
+
+//ores
+!DIMENSION [|OVERWORLD|NETHER|END|]
+or
+!DIMENSION [|OVERWORLD|NETHER|]
+or
+!DIMENSION [|NETHER|END]
+or
+!DIMENSION [|END|]
+or
+!DIMENSION [|NETHER|OVERWORLD|END|]
+aso.
+
+*********************
+Recipe Commands
+*********************
+!SINGLE_OUTPUT --> declares that recipe only has a single output if necessary
+!MULTIPLE_OUTPUTS --> declares that recipe has multiple outputs
+
+*********************
+Willi Code Generator
+*********************
+!LS --> lists files available when making a custom recipe
+!STOP --> stops adding process (exits to one stage higher in hierarchy)
+!STOP -a/-A/-absolute --> stops adding process, even while adding specific type
+!RETURN --> deletes the latest input item/block/tab... you commited.
+

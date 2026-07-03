@@ -57,6 +57,10 @@ export interface CreativeTab {
 }
 
 export interface Item {
+    asItem: BaseItem | Weapon | UpgradeableWeapon;
+}
+
+interface BaseItem {
     parsedName?: Languages;
     isWeapon: boolean;
     name: string;
@@ -72,7 +76,7 @@ export interface Item {
     fireResistant: boolean;
 }
 
-export interface Weapon {
+interface Weapon {
     weaponProperties: {
               tier: string;
               damage: number;
@@ -80,10 +84,10 @@ export interface Weapon {
           }
         | "!ULTRA";
     material?: string;
-    baseItem: Item;
+    baseItem: BaseItem;
 }
 
-export interface UpgradeableWeapon {
+interface UpgradeableWeapon {
     baseWeapon: Weapon;
     weaponClass: string;
     weaponClassCode?: string; //wenn Klasse noch ned existiert, und da nutzer des dann auf da Website programmiert ka

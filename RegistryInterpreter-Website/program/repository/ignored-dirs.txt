@@ -1,0 +1,12 @@
+node_modules
+.github
+github
+.idea
+alt
+gradle
+.gradle
+build
+logs
+run
+generated
+templates

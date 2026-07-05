@@ -107,17 +107,29 @@ export function composeBlock(block: Block): ComposedBlock {
 }
 
 export function composeItem(item: Item): ComposedItem {
-    return {};
+    return {
+        baseItem: item,
+        
+    };
 }
 
-export function composeRecipe(recipe: ): ComposedRecipe {
-    return {};
+export function composeRecipe(recipe: CraftingRecipe): ComposedRecipe {
+    return {
+        baseRecipe: recipe,
+
+    };
 }
 
 export function composeOre(ore: Ore): ComposedOre {
-    return {};
+    return {
+        baseOre: ore,
+
+    };
 }
 
 export function composeToolTier(toolTier: ToolTier): ComposedToolTier {
-    return {};
+    return {
+        baseToolTier: toolTier,
+
+    };
 }

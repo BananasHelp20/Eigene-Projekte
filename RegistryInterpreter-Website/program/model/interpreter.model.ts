@@ -130,6 +130,7 @@ export interface ToolTier {
 }
 
 export interface CraftingRecipe {
+    type: "smelting" | "shaped" | "conversion" | "shapeless" | "custom"
     asRecipe: SmeltingRecipe | ShapedRecipe | ConversionRecipe | ShapelessRecipe | CustomRecipe;
 }
 
@@ -289,6 +290,7 @@ export interface ComposedItem {
 }
 
 export interface ComposedRecipe {
+    baseRecipe: CraftingRecipe
     recipeEntry?: string; //normal Recipes
     recipeEntryClass?: `${string}.java`; //item class for recipes
     recipeInputEntry?: string; //recipes in custom blocks

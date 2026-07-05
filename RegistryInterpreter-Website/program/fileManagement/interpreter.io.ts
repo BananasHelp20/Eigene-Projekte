@@ -1,29 +1,8 @@
 import { readdir, readFile } from "fs/promises";
 import { basename, join } from "path";
-import type { Directory, File } from "../model/interpreter.model";
-import { getIgnoredDirsSet } from "../repository/interpreter.repository";
-
-export async function getDirectory(name: string, parentDir: Directory): Promise<Directory | undefined> {
-    const IGNORED_DIRS = await getIgnoredDirsSet();
-    if (parentDir.name === name) return parentDir;
-    if (IGNORED_DIRS.has(parentDir.name)) return undefined;
-
-    let dirs = parentDir.directories;
-
-    for (const directory of parentDir.directories) {
-        if (IGNORED_DIRS.has(directory.name)) {
-            continue;
-        }
-
-        const foundDirectory = getDirectory(name, directory);
-
-        if (foundDirectory !== undefined) {
-            return foundDirectory;
-        }
-    }
-
-    return undefined;
-}
+import type { CraftingRecipe, CreativeTab, Directory, File, Item, Ore, ToolTier } from "../model/interpreter.model";
+import { getIgnoredDirsSet, PRIMARY_SOURCE_TEMP } from "../repository/interpreter.repository";
+import { Block } from "typescript";
 
 export async function getIgnoredDirs(): Promise<string[]> {
     const rawContent = await readFile(join("..", "repository", "ignored-dirs.txt"), "utf8");
@@ -67,31 +46,27 @@ export async function getWholeDirectory(dirPath: string): Promise<Directory> {
     };
 }
 
-export async function findFile(name: string, parentDir: Directory): Promise<File> {
-    const matches: File[] = [];
-    const IGNORED_DIRS = await getIgnoredDirsSet();
+export async function writeTabCode(tabs: CreativeTab[]) {
+    let parentDir = await getWholeDirectory(PRIMARY_SOURCE_TEMP);
+    //alle relevanten files einlesen und dann ois zusammensetzen.
+}
 
-    function search(dir: Directory): void {
-        for (const file of dir.files) {
-            if (file.name === name) {
-                matches.push(file);
-            }
-        }
+export async function writeBlockCode(blocks: Block[]) {
+    let parentDir = await getWholeDirectory(PRIMARY_SOURCE_TEMP);
+}
 
-        for (const subDir of dir.directories) {
-            if (IGNORED_DIRS.has(subDir.name)) {
-                continue;
-            }
+export async function writeItemCode(items: Item[]) {
+    let parentDir = await getWholeDirectory(PRIMARY_SOURCE_TEMP);
+}
 
-            search(subDir);
-        }
-    }
+export async function writeRecipeCode(recipes: CraftingRecipe[]) {
+    let parentDir = await getWholeDirectory(PRIMARY_SOURCE_TEMP);
+}
 
-    search(parentDir);
+export async function writeToolTierCode(tiers: ToolTier[]) {
+    let parentDir = await getWholeDirectory(PRIMARY_SOURCE_TEMP);
+}
 
-    if (matches.length > 1) {
-        throw new Error(`cannot differentiate between files. File with name '${name}' appears ${matches.length} times in given directory!`);
-    }
-
-    return matches[0];
+export async function writeOreCode(ores: Ore[]) {
+    let parentDir = await getWholeDirectory(PRIMARY_SOURCE_TEMP);
 }

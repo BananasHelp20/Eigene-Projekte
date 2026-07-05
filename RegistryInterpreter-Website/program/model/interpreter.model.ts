@@ -1,18 +1,34 @@
 export interface Block {
     name: string;
     creationMethod?: string;
-    properties: { 
-        destroyTime: number; 
-        explosionResistance: number; 
-        soundType: string 
-    } | "!INDESTRUCTIBLE";
-    dropMethod: string;
-    dropsOtherItem?: Item;
+    properties: {
+        destroyTime?: number;
+        explosionResistance?: number;
+        soundType?: string;
+        description?: string;
+        friction?: number;
+        ignitedByLava: boolean;
+        instaBreak: boolean;
+        jumpFactor?: number;
+        speedFactor?: number;
+        requiresCorrectTool: boolean;
+        indestructable: boolean;
+    };
+    dropsAnything?: {
+        dropMethod: string;
+        dropsItem: Item | Block;
+        dropsNonModItem: boolean;
+        dropsItemAsItem: boolean; //item or block
+        dropsOtherItem?: Item | Block;
+        dropsOtherNonModItem: boolean;
+        dropsOtherItemAsItem?: boolean; //item or block
+    };
     modelMethod?: string;
-    breakingTool?: string;
+    breakingTools?: string[];
     breakingMaterial?: string;
     creativeTab?: CreativeTab;
     parsedName: Languages;
+    camelName: string;
 }
 
 export interface Ore {
@@ -37,12 +53,12 @@ export interface OreBlock {
     oreSize: number;
     placement: {
         spawnShape: string;
-        lowerBoundry: {
+        lowerBound: {
             anchor: string;
             spawnType: string;
             height: number;
         };
-        upperBoundry: {
+        upperBound: {
             anchor: string;
             spawnType: string;
             height: number;
@@ -52,20 +68,20 @@ export interface OreBlock {
 
 export interface CreativeTab {
     name: string; //this_should_look_like_this
-    displayItem: Item;
+    displayItem: Item | Block;
+    displayItemIsItem: boolean;
     parsedName: Languages;
+    camelName: string; //thisShouldLookLikeThis
 }
 
 export interface Item {
-    asItem: BaseItem | Weapon | UpgradeableWeapon;
-}
-
-interface BaseItem {
-    parsedName?: Languages;
     isWeapon: boolean;
-    name: string;
+    isUpgradeable: boolean;
+    creativeTab?: CreativeTab;
+    parsedName?: Languages; //Parsed Name | Übersetzter Name | ...
+    name: string; //not_camel_name
+    camelName: string; //CamelName
     modelMethod: string;
-    creativeTab?: string;
     enchantments?: [string];
     rarity?: string;
     createMethod?: string;
@@ -74,6 +90,7 @@ interface BaseItem {
     setNoRepair?: boolean;
     maxStackSize?: number;
     fireResistant: boolean;
+    weaponItem?: Weapon;
 }
 
 interface Weapon {
@@ -84,17 +101,18 @@ interface Weapon {
           }
         | "!ULTRA";
     material?: string;
-    baseItem: BaseItem;
+    weaponFamily?: string;
+    upgradeableWeapon?: UpgradeableWeapon;
 }
 
 interface UpgradeableWeapon {
-    baseWeapon: Weapon;
     weaponClass: string;
     weaponClassCode?: string; //wenn Klasse noch ned existiert, und da nutzer des dann auf da Website programmiert ka
     variations: [
         {
-            variation: string;
-            overrideLanguages: Languages;
+            variation: string; // z.B. Ruby
+            overrideName?: Languages; //z.B. Ruby-Enforced Sword
+            overrideDescriptions?: [{descriptionkey: string, sentence: Languages}]; //description changes
         },
     ];
 }
@@ -195,4 +213,104 @@ export interface Directory {
     directories: Directory[] //directories in directory
     name: string; //dirname
     path: string; //dirpath
+}
+
+//classes
+export interface BlockClass {
+    name: `${string}.java`;
+    voxalShapes?: [
+        {
+            name: string;
+            x1: number;
+            y1: number;
+            z1: number;
+            x2: number;
+            y2: number;
+            z2: number;
+        },
+    ];
+    voxalShapeGetter?: string;
+    ignoresPlayerFacing: boolean; //yes -> ignores player face, no -> looks at facesPlayerWhenPlaced for placement face
+    facesPlayerWhenPlaced?: boolean; //yes -> faces player, no -> faces opposite
+    stateForPlacementGetter?: string;
+    isBlockEntity: boolean;
+    blockEntityClass: {
+        isCraftingEntity: boolean;
+        hasMenu: boolean;
+        MenuClass?: {
+            name: `${string}.java`;
+        };
+        MenuEntryInModClass?: string;
+        ScreenClass?: {
+            name: `${string}.java`;
+        };
+    };
+}
+
+export interface ItemClass {
+    name: `${string}.java`;
+    constructor: string;
+    postHurtEffectMethod?: string;
+    postHurtEffectVariables?: string[];
+    variationVariable?: string;
+    rarityVariable?: string;
+    descriptionMethod?: string;
+}
+
+//composed
+export interface ComposedTab {
+    baseTab: CreativeTab;
+    supplierConstant: string;
+    tabRegister: string;
+    getDisplayItemMethod: string;
+}
+
+export interface ComposedBlock {
+    baseBlock: Block;
+    tags: string[];
+    customClass?: BlockClass;
+    customClassName?: string;
+    deferredBlockConstant: string;
+    loottableEntry: string;
+    blockStateEntry: string;
+    tagEntry: string;
+    tabEntry: string;
+}
+
+export interface ComposedItem {
+    baseItem: Item;
+    customClass?: ItemClass;
+    customClassName?: string;
+    deferredItemConstant: string;
+    itemModelEntry: string;
+    tags: string[]
+    tagEntry: string;
+    tabEntry: string;
+}
+
+export interface ComposedRecipe {
+    recipeEntry?: string; //normal Recipes
+    recipeEntryClass?: `${string}.java`; //item class for recipes
+    recipeInputEntry?: string; //recipes in custom blocks
+    recipeOutputEntry?: string; //recipes in custom blocks
+}
+
+export interface ComposedOre {
+    baseOre: Ore;
+    biomeModifierConstants: string;
+    modifierBootstrapRegisterCalls: string;
+    configuredFeatureConstants: string;
+    ruleTests: string;
+    oreConfigurationLists?: string;
+    configurationBootstrapRegisterCalls: string;
+    placedFeatureConstants: string;
+    placedFeatureBootstrapRegisterCalls: string;
+}
+
+export interface ComposedToolTier {
+    baseToolTier: ToolTier;
+    toolTierMaterialConstant: string;
+    modTagConstants: string;
+    modItemTagRegistry?: string;
+    modBlockTagRegistry?: string;
 }
